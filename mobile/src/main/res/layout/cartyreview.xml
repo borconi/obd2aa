@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@drawable/out"
+    android:layout_height="match_parent"
+   >
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="64dp">
+
+        <TableRow
+            android:layout_weight="1"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/front_left"
+                android:text=""
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:textColor="#FFFFFF"
+                android:paddingLeft="10dp"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:id="@+id/front_right"
+                android:text=""
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:textColor="#FFFFFF"
+                android:textAlignment="center"
+                android:paddingRight="10dp"
+                android:textSize="24sp"
+                android:textStyle="normal|bold"
+                />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_weight="1"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/rear_left"
+                android:text=""
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:textColor="#FFFFFF"
+                android:paddingLeft="10dp"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="normal|bold" />
+
+            <TextView
+                android:id="@+id/rear_right"
+                android:text=""
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:textColor="#FFFFFF"
+                android:textAlignment="center"
+                android:paddingRight="10dp"
+                android:textSize="24sp"
+                android:textStyle="normal|bold"
+                />
+
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

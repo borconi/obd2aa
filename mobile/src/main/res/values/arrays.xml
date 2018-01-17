@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="gaugenumbers">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+    </string-array>
+    <string-array name="fuelvalue">
+        <item>2f,0</item>
+        <item>ff126b,0</item>
+        <item>ff126a,0</item>
+    </string-array>
+    <string-array name="fuelpids">
+        <item>@string/fuel_from_ecu</item>
+        <item>@string/fuel_from_profile</item>
+        <item>@string/dist_to_empt</item>
+    </string-array>
+    <string-array name="coolantvalue">
+        <item>05,0</item>
+        <item>5c,0</item>
+    </string-array>
+    <string-array name="oilpids">
+        <item>@string/coolant_water</item>
+        <item>@string/coolant_oil</item>
+
+    </string-array>
+    <string-array name="mobile_refresh_entries">
+        <item>5 min</item>
+        <item>10 min</item>
+        <item>30 min</item>
+        <item>60 min</item>
+        <item>@string/never_mobile</item>
+    </string-array>
+    <string-array name="mobile_refresh_values">
+        <item>3000</item>
+        <item>6000</item>
+        <item>18000</item>
+        <item>36000</item>
+        <item>0</item>
+    </string-array>
+    <string-array name="cameratype">
+        <item>@string/speed_cam</item>
+        <item>@string/red_cam</item>
+        <item>@string/section_cam</item>
+        <item>@string/other_cam</item>
+    </string-array>
+    <string-array name="cameratype_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+</resources>

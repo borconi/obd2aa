@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:tag="wrapper_layout">
+        <!-- Left column -->
+
+
+        <uk.co.boconi.emil.obd2aa.ArcProgress
+            android:layout_width="226dp"
+            android:layout_height="226dp"
+            android:layout_gravity="center_vertical|start"
+
+            android:tag="gauge_2"
+
+            />
+
+
+        <!-- Middle column -->
+
+
+        <uk.co.boconi.emil.obd2aa.ArcProgress
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+
+            android:tag="gauge_1" />
+
+        <!-- right column -->
+
+        <uk.co.boconi.emil.obd2aa.ArcProgress
+            android:layout_width="226dp"
+            android:layout_height="226dp"
+            android:layout_gravity="center_vertical|end"
+
+            android:tag="gauge_3" />
+
+
+    </FrameLayout>
+
+</TableRow>

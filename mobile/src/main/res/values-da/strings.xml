@@ -1,0 +1,152 @@
+<resources>
+    <string name="app_name">OBD2AA</string>
+    <string name="settings">Indstillinger</string>
+    <string name="fuel_mon_desc">Vælg hvilken PID, der skal bruges til advarsel om lav brændstofbeholdning.</string>
+    <string name="fuel_mon_tit">Advarsel om lav brændstofbeholdning</string>
+    <string name="fuel_mon_tit_picker">Vælg PID</string>
+    <string name="pulling">Alternativ metode</string>
+    <string name="debugging">Aktiver debugging</string>
+    <string name="autostart">Start automatisk Torque med Android Auto</string>
+    <string name="camsam">Kør CamSam/Blitzer.de ved start</string>
+    <string name="generalsettings">Generelle indstillinger</string>
+    <string name="PIDAlarm">PID Alarmer</string>
+    <string name="coolant_mon_pid_tit">Kølervæske</string>
+    <string name="coolant_mon_pid_desc">Vis notifikation når motorens driftstemperatur er nået.</string>
+    <string name="temp_desc">Driftstemperaturværdi (brug samme enhed som defineret i Torque).</string>
+    <string name="notorque">Kunne ikke forbinde til Torque Pro.\n Er app\'en installeret på din enhed?\n\nTorque Pro er påkrævet for at bruge denne app.</string>
+    <string name="fuel_from_ecu">Brændstofbeholdning (fra ECU)</string>
+    <string name="fuel_from_profile">Brændstofbeholdning fra bilprofil</string>
+    <string name="dist_to_empt">Estimeret afstand til tom</string>
+    <string name="engine_warm">Motorens driftstemperatur er nået.</string>
+    <string name="clear">Ryd.</string>
+    <string name="a_nobg_only_compl_feel">Ingen baggrund, procentbue.</string>
+    <string name="b_nobg_fullfill">Ingen baggrund, fuld bue.</string>
+    <string name="c_bg_nofill">Baggrund, ingen bue.</string>
+    <string name="d_bg_fill_compl">Baggrund, procentbue.</string>
+    <string name="e_bg_ffull_fill">Baggrund, fuld bue.</string>
+    <string name="perm_req">Tilladelse påkrævet.</string>
+    <string name="perm_desc">Advarsel om fartkameraer virker ikke uden adgang til notifikationer.</string>
+    <string name="name">Navn</string>
+    <string name="min_val">Min værdi:</string>
+    <string name="max_val">Max værdi:</string>
+    <string name="gauge_style">Målerstil:</string>
+    <string name="isreversed">Gør omvendt:</string>
+    <string name="show_needle">Vis nål:</string>
+    <string name="show_scale">Vis skala:</string>
+    <string name="show_unit">Vis enhed:</string>
+    <string name="show_text">Vis tekst:</string>
+    <string name="show_decimals">Vis decimaler:</string>
+    <string name="warn1">Advarsel trin 1 (procent):</string>
+    <string name="warn2">Advarsel trin 2 (procent):</string>
+    <string name="gauge_counter">Antal målere at vise:</string>
+    <string name="arch_width">Buebredde:</string>
+    <string name="arch_color">Buefarve:</string>
+    <string name="warn1_color">Advarselsfarve 1:</string>
+    <string name="warn2_color">Advarselsfarve 2:</string>
+    <string name="text_color">Tekstfarve:</string>
+    <string name="preview">Eksempel</string>
+
+    <!-- Verions 1.5 -->
+
+    <string name="file_creation_error">Fejl ved arkivering af fil.</string>
+    <string name="front_left">Dæktryksensor, venstre for:</string>
+    <string name="front_right">Dæktryksensor, højre for:</string>
+    <string name="rear_left">Dæktryksensor, venstre bag:</string>
+    <string name="rear_right">Dæktryksensor, højre bag:</string>
+    <string name="share_settings">Del indstillinger</string>
+    <string name="imp_comp_tit">Import gennemført</string>
+    <string name="imp_comp_text">Du skal genstarte app\'en for at ændringerne træder i kraft.</string>
+    <string name="use_warning_text">Brug buefarve til tekst.</string>
+    <string name="coolant_water">Kølervæske temperature.</string>
+    <string name="coolant_oil">Motorolie temperatur.</string>
+
+    <!-- Version 1.5b -->
+    <string name="gauge_name">Måler</string>
+    <string name="pref_title">Indstillinger</string>
+    <string name="tpms_set_tit">TPMS indstillinger</string>
+    <string name="temp">Temperatur</string>
+
+    <string name="est_range">Estimeret afstand for resterende brændstof er kun: %1$d %2$s.</string>
+    <string name="rem_fuel">Brændstofbeholdning er under  %1$d %2$s</string>
+    <string name="low_fuel_tit">LAV BRÆNDSTOF</string>
+    <string name="coolant_ok">MOTORTEMP OK</string>
+    <string name="daynight">Overskriv Dag/Nat tema</string>
+    <string name="daynight_desc">Ikke markeret: Dag/Nat tema kontrolleres af forlygterne\nChecked: Dag/Nat tema kontrolleres af solopgang/-nedgang for din lokation</string>
+    <string name="nosettup">Kobl telefonen fra og åbn OBD2AA for at konfigurere målere</string>
+    <string name="ignore">Ignorer</string>
+    <string name="loc_perm_tit">Lokationstilladelse</string>
+    <string name="loc_perm_desc">For at beregne solopgang/-nedgang har app\'en brug for adgang til din lokation</string>
+
+    <!-- Version 1.5e -->
+    <string name="custom_bg">Valgfri baggrund (forhold 2:1)</string>
+    <string name="bg_path">Baggrundsfil</string>
+
+    <!--Version 1.6 -->
+    <string name="layout_style">Layout</string>
+    <string name="style">Stil</string>
+    <string name="custom_bg_ratio1">Valgfri baggrund (forhold 1:1)</string>
+    <!--Version 1.7 -->
+    <string name="fartkontrol">Kør FartKontrol ved start</string>
+    <string name="export">Export</string>
+    <string name="importmenu">Import</string>
+
+    <!-- Version 2.0 -->
+    <string name="needle_color">Nålfarve</string>
+    <string name="arch_indent">Bueindrykning</string>
+    <string name="arch_length">Buelængde (grader)</string>
+    <string name="arch_startpos">Buestartvinkel</string>
+
+    <!-- Speed Camera related strings -->
+    <string name="speedcam_settings">Indstillinger for fotofælder</string>
+    <string name="speedcam">Fotofælde om </string>
+    <string name="traffic_cam">Fotofælde i lyskryds om </string>
+    <string name="section_cam_beg">Hastighedskontrol om </string>
+    <string name="section_cam_over">Hastighedskontrol slut om </string>
+    <string name="tunnel">Tunnel om </string>
+    <string name="danger">Vær opmærksom om </string>
+    <string name="Speed_camera_settings">Indstillinger for fotofælder</string>
+    <string name="ShowSpeedCamWarrning">Vis notifikationer for fotofælder</string>
+    <string name="use_imperials">Brug amerikanske enheder</string>
+    <string name="play_sound">Output til telefonhøjtaler</string>
+    <string name="use_imperials_desc">Kun for afstand til fotofælde.\nHastighed vises altid i standarden for landet!</string>
+    <string name="streetcard">Vis kort med aktuelle gadenavn</string>
+    <string name="update_mobile_freq">Database med mobile fotofælder</string>
+    <string name="update_mobile_freq_desc">Opdatering af fotofældedatabase</string>
+    <string name="never_mobile">Aldrig</string>
+    <string name="mobile_updated">Database med mobile fotofælder opdateret</string>
+    <string name="static_updated">Database med faste fotofælder opdateret</string>
+    <string name="storage_perm">Lagertilladelse</string>
+    <string name="storage_perm_desc">Lagertilladelse påkrævet for fotofældedatabaser</string>
+    <string name="demo_summary">Brug tilfældig data i stedet for at hente fra Torque</string>
+    <string name="demo">Demo</string>
+
+    <string name="when_to_display">Afstand til fotofælde</string>
+    <string name="when_to_display_desc">Max. afstand til fotofælde før advarsel</string>
+
+    <string name="audio_w1">Lydadvarsel 1</string>
+    <string name="audio_w1_desc">Afstand for første lydadvarsel (meter), sæt til 0 for at deaktivere</string>
+
+    <string name="audio_w2">Lydadvarsel 2</string>
+    <string name="audio_w2_desc">Afstand for anden lydadvarsel (meter), sæt til 0 for at deaktivere</string>
+
+    <string name="audio_w3">Lydadvarsel 3</string>
+    <string name="audio_w3_desc">Afstand for tredje lydadvarsel (meter), sæt til 0 for at deaktivere</string>
+
+    <string name="use_mobile">Brug mobildata</string>
+    <string name="use_mobile_desc">Hvis denne indstilling er fravalgt, bliver databaser kun opdateret, når appen kører, og du er tilsluttet wifi.</string>
+
+    <string name="camera_type">Kameratyper</string>
+    <string name="camera_type_desc">Typer af kameraer/fotofælder der giver advarsel.</string>
+
+    <string name='speed_cam'>Fotofælder</string>
+    <string name='red_cam'>Fotofælder i lyskryds</string>
+    <string name='section_cam'>Hastighedsmålere</string>
+    <string name='other_cam'>Andre kameraer og advarsler</string>
+
+    <!-- Cutom Needle -->
+    <string name="custom_needle_ratio1">Valgfri nål(forhold 1:1)</string>
+    <string name="needle_path">Nål file</string>
+
+
+
+</resources>

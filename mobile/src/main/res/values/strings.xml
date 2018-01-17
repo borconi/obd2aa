@@ -1,0 +1,153 @@
+<resources>
+    <string name="app_name">OBD2AA</string>
+    <string name="settings">Preferences</string>
+    <string name="fuel_mon_desc">Select which of the PID to monitor for fuel level warning.</string>
+    <string name="fuel_mon_tit">Low fuel warning</string>
+    <string name="fuel_mon_tit_picker">Chose PID</string>
+    <string name="pulling">Alternative Pulling</string>
+    <string name="debugging">Enable debugging</string>
+    <string name="autostart">Automatically start Torque on Android Auto</string>
+    <string name="camsam">Launch CamSam/Blitzer.de on start</string>
+    <string name="generalsettings">General Settings</string>
+    <string name="PIDAlarm">PID Alarms</string>
+    <string name="coolant_mon_pid_tit">Coolant</string>
+    <string name="coolant_mon_pid_desc">Show notification when engine reaches working temperature.</string>
+    <string name="temp_desc">Working temperature value (use same unit as defined in Torque).</string>
+    <string name="notorque">Could not connect to Torque Pro.\n Is the app installed on your device?\n\nYou need to have Torque Pro installed in order to use this app.</string>
+    <string name="fuel_from_ecu">Fuel level (from ECU)</string>
+    <string name="fuel_from_profile">Fuel level from vehicle profile</string>
+    <string name="dist_to_empt">Estimated distance to empty</string>
+    <string name="engine_warm">Engine has reached the operating temperature.</string>
+    <string name="clear">Clear.</string>
+    <string name="a_nobg_only_compl_feel">No background, percentage arch.</string>
+    <string name="b_nobg_fullfill">No background, full arch.</string>
+    <string name="c_bg_nofill">Background, no arch.</string>
+    <string name="d_bg_fill_compl">Background, percentage arch.</string>
+    <string name="e_bg_ffull_fill">Background, full arch.</string>
+    <string name="perm_req">Permission required.</string>
+    <string name="perm_desc">Speed camera warnings will not work without notification access permissions.</string>
+    <string name="name">Name</string>
+    <string name="min_val">Min value:</string>
+    <string name="max_val">Max value:</string>
+    <string name="gauge_style">Gauge style:</string>
+    <string name="isreversed">Is reversed:</string>
+    <string name="show_needle">Show needle:</string>
+    <string name="show_scale">Show scale:</string>
+    <string name="show_unit">Show unit:</string>
+    <string name="show_text">Show text:</string>
+    <string name="show_decimals">Show decimals:</string>
+    <string name="warn1">Warning level 1 (percentage):</string>
+    <string name="warn2">Warning level 2 (percentage):</string>
+    <string name="gauge_counter">Number of gauges to be displayed:</string>
+    <string name="arch_width">Arch width:</string>
+    <string name="arch_color">Arch color:</string>
+    <string name="warn1_color">Warning Color 1:</string>
+    <string name="warn2_color">Warning Color 2:</string>
+    <string name="text_color">Text Color:</string>
+    <string name="preview">Preview</string>
+
+    <!-- Verions 1.5 -->
+
+    <string name="file_creation_error">Error saving data to file.</string>
+    <string name="front_left">Front left pressure sensor:</string>
+    <string name="front_right">Front right pressure sensor:</string>
+    <string name="rear_left">Rear left pressure sensor:</string>
+    <string name="rear_right">Rear right pressure sensor:</string>
+    <string name="share_settings">Share settings</string>
+    <string name="imp_comp_tit">Import completed</string>
+    <string name="imp_comp_text">You must restart the app for changes to take effect.</string>
+    <string name="use_warning_text">Use arch color for text.</string>
+    <string name="coolant_water">Engine coolant temperature.</string>
+    <string name="coolant_oil">Engine oil temperature.</string>
+
+    <!-- Version 1.5b -->
+    <string name="gauge_name">Gauge</string>
+    <string name="pref_title">Preferences</string>
+    <string name="tpms_set_tit">TPMS Settings</string>
+    <string name="temp">Temperature</string>
+
+    <string name="est_range">Estimated fuel range is only: %1$d %2$s.</string>
+    <string name="rem_fuel">Remaining fuel level below  %1$d %2$s</string>
+    <string name="low_fuel_tit">LOW FUEL</string>
+    <string name="coolant_ok">ENGINE TEMP OK</string>
+    <string name="daynight">Overwrite Day/Night theme</string>
+    <string name="daynight_desc">Unchecked: Day/Night theme is controlled by headlights\nChecked: Day/Night Theme is Controlled by Sunrise / Sunset time of your location</string>
+    <string name="nosettup">Disconnect the phone and open OBD2AA to configure gauges</string>
+    <string name="ignore">Ignore</string>
+    <string name="loc_perm_tit">Location Permission</string>
+    <string name="loc_perm_desc">In order to calculate the sunset/sunrise this app needs access to your location</string>
+
+    <!-- Version 1.5e -->
+    <string name="custom_bg">Custom background (2:1 ratio)</string>
+    <string name="bg_path">Background file</string>
+
+    <!--Version 1.6 -->
+    <string name="layout_style">Layout</string>
+    <string name="style">Style</string>
+    <string name="custom_bg_ratio1">Custom background (1:1 ratio)</string>
+
+    <!--Version 1.7 -->
+    <string name="fartkontrol">Launch FartKontrol on start</string>
+    <string name="export">Export</string>
+    <string name="importmenu">Import</string>
+
+
+
+    <!-- Version 2.0 -->
+    <string name="needle_color">Needle color</string>
+    <string name="arch_indent">Arch indent</string>
+    <string name="arch_length">Arch length (deg)</string>
+    <string name="arch_startpos">Arch start angle</string>
+
+    <!-- Speed Camera related strings -->
+    <string name="speedcam_settings">Speed camera settings</string>
+    <string name="speedcam">Speed camera in </string>
+    <string name="traffic_cam">Traffic light camera in </string>
+    <string name="section_cam_beg">Avg. speed check in </string>
+    <string name="section_cam_over">End avg. speed check in </string>
+    <string name="tunnel">Tunnel in </string>
+    <string name="danger">Danger in </string>
+    <string name="Speed_camera_settings">Speed Camera Settings</string>
+    <string name="ShowSpeedCamWarrning">Show notification for speed cameras</string>
+    <string name="use_imperials">Use imperial units</string>
+    <string name="play_sound">Output on phone speaker</string>
+    <string name="use_imperials_desc">Only for distance to camera.\nSpeed limit is always displayed in the country standard!</string>
+    <string name="streetcard">Show current street card</string>
+    <string name="update_mobile_freq">Mobile databse camera</string>
+    <string name="update_mobile_freq_desc">Frequency of mobile database update</string>
+    <string name="never_mobile">Never</string>
+    <string name="mobile_updated">Mobile speed camera database updated</string>
+    <string name="static_updated">Static speed camera  database updated</string>
+    <string name="storage_perm">Storage Permission</string>
+    <string name="storage_perm_desc">Storage permision required for CameraDatabase</string>
+    <string name="demo_summary">Return random data without actually pulling from Torque</string>
+    <string name="demo">Demo</string>
+
+    <string name="when_to_display">Distance to camera</string>
+    <string name="when_to_display_desc">Maximum distance to display speed camera</string>
+
+    <string name="audio_w1">Audio warning 1</string>
+    <string name="audio_w1_desc">First audio warning distance (m/yd), set it to 0 to disable it</string>
+
+    <string name="audio_w2">Audio warning 2</string>
+    <string name="audio_w2_desc">Second audio warning distance (m/yd), set it to 0 to disable it</string>
+
+    <string name="audio_w3">Audio warning 3</string>
+    <string name="audio_w3_desc">Third audio warning distance (m/yd), set it to 0 to disable it</string>
+
+    <string name="use_mobile">Use mobile data</string>
+    <string name="use_mobile_desc">If this option is disabled speed camera database will only be updated when the app is running and you are connected to a Wifi.</string>
+
+    <string name="camera_type">Camera types</string>
+    <string name="camera_type_desc">Types of cameras which will trigger an alert.</string>
+
+    <string name='speed_cam'>Speed Camera</string>
+    <string name='red_cam'>Traffic Light Camera</string>
+    <string name='section_cam'>Section(Average speed) Camera</string>
+    <string name='other_cam'>Other cameras and warnings</string>
+
+    <!-- Cutom Needle -->
+    <string name="custom_needle_ratio1">Custom Needle (ratio 1:1)</string>
+    <string name="needle_path">Needle file</string>
+
+</resources>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/speedcam_settings">
+
+
+
+        <CheckBoxPreference android:title="@string/streetcard"
+            android:defaultValue="true"
+            android:key="streetcard"
+            />
+
+
+        <CheckBoxPreference android:title="@string/ShowSpeedCamWarrning"
+            android:defaultValue="true"
+            android:key="ShowSpeedCamWarrning"
+            />
+        <CheckBoxPreference android:title="@string/use_imperials"
+            android:defaultValue="false"
+            android:key="useimperials"
+            android:summary="@string/use_imperials_desc"
+            />
+        <EditTextPreference android:title="@string/when_to_display"
+            android:key="visual_display"
+            android:dependency="ShowSpeedCamWarrning"
+            android:inputType="number"
+            android:defaultValue="1000"
+            android:dialogTitle="@string/when_to_display"
+            android:summary="@string/when_to_display_desc"/>
+
+        <EditTextPreference android:title="@string/audio_w1"
+            android:key="audio_1"
+            android:dependency="ShowSpeedCamWarrning"
+            android:inputType="number"
+            android:defaultValue="800"
+            android:dialogTitle="@string/audio_w1"
+            android:summary="@string/audio_w1_desc"/>
+
+        <EditTextPreference android:title="@string/audio_w2"
+            android:key="audio_2"
+            android:dependency="ShowSpeedCamWarrning"
+            android:inputType="number"
+            android:defaultValue="400"
+            android:dialogTitle="@string/audio_w2"
+            android:summary="@string/audio_w2_desc"/>
+
+        <EditTextPreference android:title="@string/audio_w3"
+            android:key="audio_3"
+            android:dependency="ShowSpeedCamWarrning"
+            android:inputType="number"
+            android:defaultValue="100"
+            android:dialogTitle="@string/audio_w3"
+            android:summary="@string/audio_w3_desc"/>
+
+
+        <CheckBoxPreference android:title="@string/play_sound"
+            android:defaultValue="false"
+            android:key="play_sound"
+            android:dependency="ShowSpeedCamWarrning"
+            />
+
+        <CheckBoxPreference android:title="@string/use_mobile"
+            android:defaultValue="false"
+            android:key="use_mobile"
+            android:dependency="ShowSpeedCamWarrning"
+            android:summary="@string/use_mobile_desc"
+            />
+
+        <ListPreference
+            android:title="@string/update_mobile_freq"
+            android:key="mobile_update_freq"
+            android:numeric="integer"
+            android:entries="@array/mobile_refresh_entries"
+            android:entryValues="@array/mobile_refresh_values"
+            android:summary="@string/update_mobile_freq_desc"
+            android:defaultValue="3000"
+            android:dependency="ShowSpeedCamWarrning"
+            />
+
+        <MultiSelectListPreference
+            android:dialogTitle="@string/camera_type"
+            android:dependency="ShowSpeedCamWarrning"
+            android:key="cam_types"
+            android:summary="@string/camera_type_desc"
+            android:title="@string/camera_type"
+            android:entries="@array/cameratype"
+            android:entryValues="@array/cameratype_values"
+            android:defaultValue="@array/cameratype_values"
+            />
+
+</PreferenceScreen>

@@ -1,0 +1,280 @@
+[
+  {
+    "elements": [
+      {
+        "element_name": "VIN",
+        "exlap_type": 8,
+        "state": 1,
+        "value": "j3j3j3f4k3v11nj3j"
+      }
+    ],
+    "timestamp": 100,
+    "url": "vehicleIdenticationNumber"
+  },
+  {
+    "elements": [
+      {
+        "element_name": "StickerBits",
+        "exlap_type": 0,
+        "state": 1,
+        "value": 0
+      },
+      {
+        "element_name": "Type",
+        "exlap_type": 8,
+        "state": 1,
+        "value": "0403070010"
+      }
+    ],
+    "timestamp": 200,
+    "url": "Car_vehicleInformation"
+  },
+  {
+    "elements": [
+      {
+        "element_name": "Warning",
+        "exlap_type": 5,
+        "state": 1,
+        "value": {
+          "dataObjects": [],
+          "isImmutable": false
+        }
+      }
+    ],
+    "timestamp": 300,
+    "url": "Car_vehicleState"
+  },
+  {
+    "elements": [
+      {
+        "element_name": "primaryEngine",
+        "exlap_type": 4,
+        "state": 1,
+        "value": "petrol"
+      },
+      {
+        "element_name": "secondaryEngine",
+        "exlap_type": 4,
+        "state": 1,
+        "value": "not_installed"
+      }
+    ],
+    "timestamp": 1493277143076,
+    "url": "engineTypes"
+  },
+  {
+    "elements": [
+      {
+        "element_name": "state",
+        "exlap_type": 4,
+        "state": 1,
+        "value": "valid"
+      },
+      {
+        "element_name": "level",
+        "exlap_type": 7,
+        "state": 1,
+        "value": 0.76
+      }
+    ],
+    "timestamp": 200,
+    "url": "tankLevelPrimary"
+  },
+  {
+    "elements": [
+      {
+        "element_name": "state",
+        "exlap_type": 4,
+        "state": 1,
+        "value": "valid"
+      },
+      {
+        "element_name": "level",
+        "exlap_type": 7,
+        "state": 1,
+        "value": 0.5
+      }
+    ],
+    "timestamp": 4000,
+    "url": "tankLevelPrimary"
+  },
+  {
+    "elements": [
+      {
+        "element_name": "value",
+        "exlap_type": 0,
+        "state": 1,
+        "value": 22.2
+      },
+      {
+        "element_name": "state",
+        "exlap_type": 4,
+        "state": 1,
+        "value": "valid"
+      },
+      {
+        "element_name": "unit",
+        "exlap_type": 4,
+        "state": 1,
+        "value": "l/100km"
+      }
+    ],
+    "timestamp": 2000,
+    "url": "shortTermConsumptionPrimary"
+  },
+  {
+    "elements": [
+      {
+        "element_name": "value",
+        "exlap_type": 0,
+        "state": 1,
+        "value": 18.2
+      },
+      {
+        "element_name": "state",
+        "exlap_type": 4,
+        "state": 1,
+        "value": "valid"
+      },
+      {
+        "element_name": "unit",
+        "exlap_type": 4,
+        "state": 1,
+        "value": "l/100km"
+      }
+    ],
+    "timestamp": 4000,
+    "url": "shortTermConsumptionPrimary"
+  },
+  {
+    "elements": [
+      {
+        "element_name": "value",
+        "exlap_type": 0,
+        "state": 1,
+        "value": 14.4
+      },
+      {
+        "element_name": "state",
+        "exlap_type": 4,
+        "state": 1,
+        "value": "valid"
+      },
+      {
+        "element_name": "unit",
+        "exlap_type": 4,
+        "state": 1,
+        "value": "l/100km"
+      }
+    ],
+    "timestamp": 8000,
+    "url": "shortTermConsumptionPrimary"
+  },
+  {
+    "elements": [
+      {
+        "element_name": "value",
+        "exlap_type": 0,
+        "state": 1,
+        "value": 30.4
+      },
+      {
+        "element_name": "state",
+        "exlap_type": 4,
+        "state": 1,
+        "value": "valid"
+      },
+      {
+        "element_name": "unit",
+        "exlap_type": 4,
+        "state": 1,
+        "value": "l/100km"
+      }
+    ],
+    "timestamp": 3000,
+    "url": "currentConsumptionPrimary"
+  },
+  {
+    "elements": [
+      {
+        "element_name": "value",
+        "exlap_type": 0,
+        "state": 1,
+        "value": 21.2
+      },
+      {
+        "element_name": "state",
+        "exlap_type": 4,
+        "state": 1,
+        "value": "valid"
+      },
+      {
+        "element_name": "unit",
+        "exlap_type": 4,
+        "state": 1,
+        "value": "l/100km"
+      }
+    ],
+    "timestamp": 5000,
+    "url": "currentConsumptionPrimary"
+  },
+  {
+    "elements": [
+      {
+        "element_name": "value",
+        "exlap_type": 0,
+        "state": 1,
+        "value": 15.3
+      },
+      {
+        "element_name": "state",
+        "exlap_type": 4,
+        "state": 1,
+        "value": "valid"
+      },
+      {
+        "element_name": "unit",
+        "exlap_type": 4,
+        "state": 1,
+        "value": "l/100km"
+      }
+    ],
+    "timestamp": 7000,
+    "url": "currentConsumptionPrimary"
+  },
+  {
+    "elements": [
+      {
+        "element_name": "value",
+        "exlap_type": 0,
+        "state": 1,
+        "value": 6.6
+      },
+      {
+        "element_name": "state",
+        "exlap_type": 4,
+        "state": 1,
+        "value": "valid"
+      },
+      {
+        "element_name": "unit",
+        "exlap_type": 4,
+        "state": 1,
+        "value": "l/100km"
+      }
+    ],
+    "timestamp": 9000,
+    "url": "currentConsumptionPrimary"
+  },
+  {
+    "elements": [
+      {
+        "element_name": "warningPrimaryTank",
+        "exlap_type": 1,
+        "state": 0
+      }
+    ],
+    "timestamp": 400,
+    "url": "fuelWarningPrimaryTank"
+  }
+]

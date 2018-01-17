@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:myapp="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/pref_menu"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="@string/settings"
+        android:onClick="openpref"
+         />
+    <item
+        android:id="@+id/speedcam_menu"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="@string/speedcam_settings"
+        android:onClick="openpref"
+        />
+    <item
+        android:id="@+id/tpms_menu"
+        android:title="TPMS"
+        android:onClick="openpref"
+         />
+   <item
+        android:id="@+id/exp_item"
+        android:title="@string/export"
+        android:onClick="export_settings"
+         />
+   <item
+        android:id="@+id/imp_item"
+        android:title="@string/importmenu"
+        android:onClick="import_settings"
+         />
+</menu>
