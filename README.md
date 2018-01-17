@@ -1,7 +1,9 @@
 # obd2aa
 
 This app is a plugin extension for Torque Pro and it allows you to display Torque Pro data on an Android Auto compatible screen. It also incorporates Speed Camera warnings as well as street card info.
+
 The application is a comercial application and can/should be purchased from: https://labs.xda-developers.com/store/app/uk.co.boconi.emil.obd2aa
+
 For further support and discussion please visit: https://forum.xda-developers.com/general/paid-software/app-obd2-plugin-android-auto-torque-t3657805
 
 
