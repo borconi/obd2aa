@@ -8,7 +8,6 @@
     <CheckBoxPreference android:title="@string/pulling"
         android:key="alternativepulling"
         android:defaultValue="false"
-        android:summary="@string/alternativepulling_desc"
         />
 
     <CheckBoxPreference android:title="@string/debugging"
@@ -23,7 +22,6 @@
        <CheckBoxPreference android:title="@string/fartkontrol"
         android:defaultValue="true"
         android:key="fartkontrol"
-        android:summary="@string/fartkontrol_desc"
         />
 
      <CheckBoxPreference android:title="@string/daynight"

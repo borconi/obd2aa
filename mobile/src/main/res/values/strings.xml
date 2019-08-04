@@ -149,7 +149,5 @@
     <!-- Cutom Needle -->
     <string name="custom_needle_ratio1">Custom Needle (ratio 1:1)</string>
     <string name="needle_path">Needle file</string>
-    <string name="fartkontrol_desc">Launches a Danish Speed Camera app (useless outside Denmark)</string>
-    <string name="alternativepulling_desc">Old deprecated method of obtaining data, to try when you have difficulties getting gauges updated</string>
 
 </resources>
