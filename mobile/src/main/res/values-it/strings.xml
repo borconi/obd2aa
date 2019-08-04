@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">OBD2AA</string>
     <string name="settings">Impostazioni</string>
-    <string name="fuel_mon_desc">Seleziona PID per l'avviso livello carburante</string>
+    <string name="fuel_mon_desc">Seleziona PID per l\'avviso livello carburante</string>
     <string name="fuel_mon_tit">Avviso livello carburante</string>
     <string name="fuel_mon_tit_picker">Seleziona PID</string>
     <string name="pulling">Interrogazione alternativa</string>
