@@ -1,0 +1,246 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+env:
+  GRADLE_BIN: gradlew
+  GRADLE_PATH: gradle/wrapper/
+  JAVA_VERSION: 11
+  JAVA_PACKAGE: jdk
+  JAVA_ARCH: x64
+  #OPTIONALLY DEFINED SECRETS FOR SIGNING AND ALERTING
+  QA_WEBHOOK_URI: ${{ secrets.QA_WEBHOOK_URI }}
+  KEYSTORE: ${{ secrets.KEYSTORE }}
+  KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+  KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+  KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' 
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup JDK
+        uses: actions/setup-java@v1.4.3
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          java-package: ${{ env.JAVA_PACKAGE }}
+          architecture: ${{ env.JAVA_ARCH }}
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v2.0.2
+
+      - name: Gradle Compile Check
+        id: compile
+        uses: eskatos/gradle-command-action@v1.3.3
+        with:
+          arguments: compileReleaseSources
+          wrapper-directory: ${{ env.GRADLE_PATH }}
+          gradle-executable: ${{ env.GRADLE_BIN }}
+          wrapper-cache-enabled: true
+          dependencies-cache-enabled: true
+          configuration-cache-enabled: true
+
+  check:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup JDK
+        uses: actions/setup-java@v1.4.3
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          java-package: ${{ env.JAVA_PACKAGE }}
+          architecture: ${{ env.JAVA_ARCH }}
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v2.0.2
+
+      - name: Gradle Run Checks
+        id: check
+        uses: eskatos/gradle-command-action@v1.3.3
+        with:
+          arguments: check
+          wrapper-directory: ${{ env.GRADLE_PATH }}
+          gradle-executable: ${{ env.GRADLE_BIN }}
+
+      - name: Android Lint Report
+        if: always()
+        uses: yutailang0119/action-android-lint@v1.0.2
+        with:
+          xml_path: app/build/reports/lint-results.xml
+
+  unittest:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup JDK
+        uses: actions/setup-java@v1.4.3
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          java-package: ${{ env.JAVA_PACKAGE }}
+          architecture: ${{ env.JAVA_ARCH }}
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v2.0.2
+
+      - name: Gradle Run Unit Tests
+        id: unittest
+        uses: eskatos/gradle-command-action@v1.3.3
+        with:
+          arguments: test
+          wrapper-directory: ${{ env.GRADLE_PATH }}
+          gradle-executable: ${{ env.GRADLE_BIN }}
+
+      - name: Android Test Report
+        if: always()
+        uses: asadmansr/android-test-report-action@v1.2.0
+
+  pre-release:
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/main' && github.event_name == 'push' }}
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: FranzDiebold/github-env-vars-action@v2.1.0
+
+      - name: Get Previous Tag
+        id: previous-tag
+        uses: WyriHaximus/github-action-get-previous-tag@1.0.0
+        continue-on-error: true
+
+      - name: Catch Tag
+        id: catch-tag
+        shell: pwsh
+        run: |
+          if ([string]::IsNullOrWhiteSpace($env:VERSION)) {
+            Write-Host "Unable to find existing tags: Setting initial to [v0.0.0]"
+            return "::set-output name=tag::v0.0.0"
+          } else {
+            Write-Host "Existing tag found: using [${env:VERSION}]"
+            return "::set-output name=tag::${env:VERSION}"
+          }
+        env:
+          VERSION: ${{ steps.previous-tag.outputs.tag }}
+
+      - name: Next SemVer
+        id: next-ver
+        uses: WyriHaximus/github-action-next-semvers@v1.0
+        with:
+          version: ${{ steps.catch-tag.outputs.tag }}
+
+      - name: Set User Configuration
+        uses: oleksiyrudenko/gha-git-credentials@v2
+        with:
+          name: 'GitHub Actions'
+          email: 'github-bot@sleepnumber.com'
+          actor: 'GitHub Actions'
+          token: '${{ secrets.GITHUB_TOKEN }}'
+
+      - name: Select SemVer
+        id: select-ver
+        shell: pwsh
+        run: |
+          if ($env:IS_MAJOR -eq $true) {
+            Write-Host "Bump MAJOR octet: [${env:V_MAJOR}]"
+            $output = $env:V_MAJOR
+          } elseif ($env:IS_MINOR -eq $true) {
+            Write-Host "Bump MINOR octet: [${env:V_MINOR}]"
+            $output = $env:V_MINOR
+          } else {
+            Write-Host "Bump PATCH octet: [${env:V_PATCH}]"
+            $output = $env:V_PATCH
+          }
+
+          git tag -a $output -m $env:SHA | Out-Null
+          return "::set-output name=tag::${output}"
+        env:
+          IS_MAJOR: ${{ contains(toJson(github.event.commits), 'bump-major') }} #CUSTOMIZE COMMIT MESSAGE TRIGGER HERE
+          IS_MINOR: ${{ contains(toJson(github.event.commits), 'bump-minor') }} #CUSTOMIZE COMMIT MESSAGE TRIGGER HERE
+          V_MAJOR: ${{ steps.next-ver.outputs.v_major }}
+          V_MINOR: ${{ steps.next-ver.outputs.v_minor }}
+          V_PATCH: ${{ steps.next-ver.outputs.v_patch }}
+          SHA: ${{ github.sha }}
+
+      - name: Setup JDK
+        uses: actions/setup-java@v1.4.3
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          java-package: ${{ env.JAVA_PACKAGE }}
+          architecture: ${{ env.JAVA_ARCH }}
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v2.0.2
+
+      - name: Gradle Assemble
+        id: assemble
+        uses: eskatos/gradle-command-action@v1.3.3
+        with:
+          arguments: assemble
+          wrapper-directory: ${{ env.GRADLE_PATH }}
+          gradle-executable: ${{ env.GRADLE_BIN }}
+          wrapper-cache-enabled: true
+          dependencies-cache-enabled: true
+          configuration-cache-enabled: true
+
+      - name: Sign APK(s)
+        if: ${{ contains(env, 'KEYSTORE') && contains(env, 'KEY_ALIAS') && contains(env, 'KEYSTORE_PASSWORD') && contains(env, 'KEY_PASSWORD') }}
+        uses: r0adkll/sign-android-release@v1
+        with:
+            releaseDirectory: app/build/outputs/apk/release
+            signingKeyBase64: ${{ secrets.KEYSTORE }}
+            alias: ${{ secrets.KEY_ALIAS }}
+            keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
+            keyPassword: ${{ secrets.KEY_PASSWORD }}
+            
+      - name: Normalize APK Name(s)
+        shell: pwsh
+        run: |
+          foreach ($file in $(Get-ChildItem -Path $(pwd) -Filter *.apk -Recurse)) {
+            switch -regex ($file.Name) {
+              '.*unsigned-(signed|aligned).apk$' { $file | Rename-Item -NewName "$($file.BaseName.Replace('unsigned-',''))-${env:VERSION}$($file.Extension)" }
+              '.*-debug.apk$' { $file | Rename-Item -NewName "$($file.BaseName)-${env:VERSION}$($file.Extension)" }
+              '.*unsigned.apk$' { $file | Remove-Item -Force }
+            }
+          }
+        env:
+          VERSION: ${{ steps.select-ver.outputs.tag }}
+
+      - name: Create Pre-Release Tag
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "**/*.apk"
+          name: "${{ env.CI_REPOSITORY_NAME_SLUG }}-${{ steps.select-ver.outputs.tag }}-rc"
+          commit: ${{ github.sha }}
+          prerelease: true
+          #draft: true
+          tag: "${{ steps.select-ver.outputs.tag }}"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      # https://docs.microsoft.com/en-us/outlook/actionable-messages/message-card-reference?WT.mc_id=aliencubeorg-github-juyoo#section-fields
+      # https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/connectors-using
+      # https://messagecardplayground.azurewebsites.net/
+      - name: Microsoft Teams Notification
+        if: ${{ contains(env, 'QA_WEBHOOK_URI') }}
+        uses: aliencube/microsoft-teams-actions@v0.8.0
+        with:
+          webhook_uri: ${{ env.QA_WEBHOOK_URI }}
+          summary: "${{ env.CI_REPOSITORY_NAME_SLUG }}-${{ steps.select-ver.outputs.tag }}-rc Tag Created"
+          text: "Testing needed on new tag."
+          #theme_color: ''
+          #sections: ''
+          #actions: ''
