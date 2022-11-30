@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ArcProgress">
+        <attr name="arc_progress" format="integer" />
+        <attr name="arc_angle" format="float" />
+        <attr name="arc_stroke_width" format="dimension" />
+        <attr name="arc_max" format="integer" />
+        <attr name="arc_min" format="integer" />
+        <attr name="gaugestyle" format="integer" />
+
+        <attr name="arc_unfinished_color" format="color" />
+        <attr name="arc_finished_color" format="color" />
+        <attr name="low1_color" format="color" />
+        <attr name="low2_color" format="color" />
+        <attr name="warn1" format="integer" />
+        <attr name="warn2" format="integer" />
+        <attr name="isReverse" format="boolean" />
+        <attr name="showArc" format="boolean" />
+        <attr name="showtext" format="boolean" />
+        <attr name="showNeedle" format="boolean" />
+
+        <attr name="arc_text_size" format="dimension" />
+        <attr name="arc_text_color" format="color" />
+
+        <attr name="arc_suffix_text" format="string" />
+        <attr name="arc_suffix_text_size" format="dimension" />
+        <attr name="arc_suffix_text_padding" format="dimension" />
+
+        <attr name="arc_bottom_text" format="string" />
+        <attr name="arc_bottom_text_size" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="Themes">
+        <attr name="arcProgressStyle" format="reference" />
+    </declare-styleable>
+
+</resources>

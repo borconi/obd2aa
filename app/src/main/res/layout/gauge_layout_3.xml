@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black"
+    android:id="@+id/wrapper_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:tag="wrapper_layout">
+    <!-- Left column -->
+
+    <uk.co.borconi.emil.obd2aa.ArcProgress
+        android:id="@+id/gauge_1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:tag="gauge_1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.4" />
+
+    <uk.co.borconi.emil.obd2aa.ArcProgress
+        android:id="@+id/gauge_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:tag="gauge_2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.4" />
+
+    <uk.co.borconi.emil.obd2aa.ArcProgress
+        android:id="@+id/gauge_3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:tag="gauge_3"
+        app:layout_constraintBottom_toTopOf="@id/gauge_4"
+        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintLeft_toRightOf="@id/gauge_2"
+        app:layout_constraintRight_toLeftOf="@id/gauge_1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.2" />
+
+    <uk.co.borconi.emil.obd2aa.ArcProgress
+        android:id="@+id/gauge_4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:tag="gauge_4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintLeft_toRightOf="@id/gauge_2"
+        app:layout_constraintRight_toLeftOf="@id/gauge_1"
+        app:layout_constraintTop_toBottomOf="@id/gauge_3"
+        app:layout_constraintWidth_percent="0.2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

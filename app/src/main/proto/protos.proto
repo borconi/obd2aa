@@ -1,0 +1,2114 @@
+syntax = "proto2";
+
+import "common.proto";
+
+option java_outer_classname = "Protos";
+option java_package = "uk.co.borconi.emil.obd2aa";
+option java_multiple_files = true;
+
+message VersionRequestOptions {
+    optional int64 snapshot_version = 1;
+}
+
+message VersionResponseOptions {
+    optional ConnectionConfiguration connection_configuration = 1;
+}
+
+message AuthResponse {
+    required int32 status = 1;
+}
+
+message ServiceDiscoveryRequest {
+    optional bytes small_icon = 1;
+    optional bytes medium_icon = 2;
+    optional bytes large_icon = 3;
+    optional string label_text = 4;
+    optional string device_name = 5;
+    optional common.PhoneInfo phone_info = 6;
+}
+
+message ServiceDiscoveryResponse {
+    repeated Service services = 1;
+    optional string make = 2 [deprecated = true];
+    optional string model = 3 [deprecated = true];
+    optional string year = 4 [deprecated = true];
+    optional string vehicle_id = 5 [deprecated = true];
+    optional DriverPosition driver_position = 6;
+    optional string head_unit_make = 7 [deprecated = true];
+    optional string head_unit_model = 8 [deprecated = true];
+    optional string head_unit_software_build = 9 [deprecated = true];
+    optional string head_unit_software_version = 10 [deprecated = true];
+    optional bool can_play_native_media_during_vr = 11 [deprecated = true];
+    optional int32 session_configuration = 13;
+    optional string display_name = 14;
+    optional bool probe_for_support = 15;
+    optional ConnectionConfiguration connection_configuration = 16;
+    optional common.HeadUnitInfo headunit_info = 17;
+}
+
+message ServiceDiscoveryUpdate {
+    optional Service service = 1;
+}
+
+message Service {
+    required int32 id = 1;
+    optional SensorSourceService sensor_source_service = 2;
+    optional MediaSinkService media_sink_service = 3;
+    optional InputSourceService input_source_service = 4;
+    optional MediaSourceService media_source_service = 5;
+    optional BluetoothService bluetooth_service = 6;
+    optional RadioService radio_service = 7;
+    optional NavigationStatusService navigation_status_service = 8;
+    optional MediaPlaybackStatusService media_playback_service = 9;
+    optional PhoneStatusService phone_status_service = 10;
+    optional MediaBrowserService media_browser_service = 11;
+    optional VendorExtensionService vendor_extension_service = 12;
+    optional GenericNotificationService generic_notification_service = 13;
+    optional WifiProjectionService wifi_projection_service = 14;
+}
+
+message ConnectionConfiguration {
+    optional PingConfiguration ping_configuration = 1;
+    optional WirelessTcpConfiguration wireless_tcp_configuration = 2;
+}
+
+message PingConfiguration {
+    optional uint32 timeout_ms = 1;
+    optional uint32 interval_ms = 2;
+    optional uint32 high_latency_threshold_ms = 3;
+    optional uint32 tracked_ping_count = 4;
+}
+
+message WirelessTcpConfiguration {
+    optional uint32 socket_receive_buffer_size_kb = 1;
+    optional uint32 socket_send_buffer_size_kb = 2;
+    optional uint32 socket_read_timeout_ms = 3;
+}
+
+message SensorSourceService {
+    repeated Sensor sensors = 1;
+    message Sensor {
+        required SensorType sensor_type = 1;
+    }
+    
+    optional uint32 location_characterization = 2;
+    repeated FuelType supported_fuel_types = 3;
+    repeated EvConnectorType supported_ev_connector_types = 4;
+}
+
+message MediaSinkService {
+    optional MediaCodecType available_type = 1 [default = MEDIA_CODEC_AUDIO_PCM];
+    optional AudioStreamType audio_type = 2;
+    repeated AudioConfiguration audio_configs = 3;
+    repeated VideoConfiguration video_configs = 4;
+    optional bool available_while_in_call = 5;
+    optional uint32 display_id = 6;
+    optional DisplayType display_type = 7;
+    optional KeyCode initial_content_keycode = 8;
+}
+
+message VideoConfiguration {
+    optional VideoCodecResolutionType codec_resolution = 1;
+    optional VideoFrameRateType frame_rate = 2;
+    optional uint32 width_margin = 3;
+    optional uint32 height_margin = 4;
+    optional uint32 density = 5;
+    optional uint32 decoder_additional_depth = 6;
+    optional uint32 viewing_distance = 7;
+    optional uint32 pixel_aspect_ratio_e4 = 8;
+    optional uint32 real_density = 9;
+    optional MediaCodecType video_codec_type = 10;
+    optional UiConfig ui_config = 11;
+}
+
+message UiConfig {
+    optional Insets margins = 1;
+    optional Insets content_insets = 2;
+    optional Insets stable_content_insets = 3;
+    optional UiTheme ui_theme = 4;
+}
+
+message Insets {
+    optional uint32 top = 1;
+    optional uint32 bottom = 2;
+    optional uint32 left = 3;
+    optional uint32 right = 4;
+}
+
+message MediaSourceService {
+    optional MediaCodecType available_type = 1 [default = MEDIA_CODEC_AUDIO_PCM];
+    optional AudioConfiguration audio_config = 2;
+    optional bool available_while_in_call = 3;
+}
+
+message AudioConfiguration {
+    required uint32 sampling_rate = 1;
+    required uint32 number_of_bits = 2;
+    required uint32 number_of_channels = 3;
+}
+
+message InputSourceService {
+    repeated int32 keycodes_supported = 1 [packed = true];
+    
+    repeated TouchScreen touchscreen = 2;
+    message TouchScreen {
+        required int32 width = 1;
+        required int32 height = 2;
+        optional TouchScreenType type = 3;
+        optional bool is_secondary = 4;
+    }
+    
+    repeated TouchPad touchpad = 3;
+    message TouchPad {
+        required int32 width = 1;
+        required int32 height = 2;
+        optional bool ui_navigation = 3;
+        optional int32 physical_width = 4;
+        optional int32 physical_height = 5;
+        optional bool ui_absolute = 6;
+        optional bool tap_as_select = 7;
+        optional int32 sensitivity = 8;
+    }
+    
+    repeated FeedbackEvent feedback_events_supported = 4;
+    optional uint32 display_id = 5;
+}
+
+message BluetoothService {
+    required string car_address = 1;
+    repeated BluetoothPairingMethod supported_pairing_methods = 2 [packed = true];
+}
+
+message RadioService {
+    repeated RadioProperties radio_properties = 1;
+}
+
+message RadioProperties {
+    required int32 radio_id = 1;
+    required RadioType type = 2;
+    repeated Range channel_range = 3;
+    repeated int32 channel_spacings = 4;
+    required int32 channel_spacing = 5;
+    optional bool background_tuner = 6;
+    optional ItuRegion region = 7;
+    optional RdsType rds = 8;
+    optional bool af_switch = 9;
+    optional bool ta = 10;
+    optional TrafficServiceType traffic_service = 11;
+    optional bool audio_loopback = 12;
+    optional bool mute_capability = 13;
+    optional int32 station_presets_access = 14;
+}
+
+message Range {
+    required int32 min = 1;
+    required int32 max = 2;
+}
+
+message NavigationStatusService {
+    required int32 minimum_interval_ms = 1;
+    
+    required InstrumentClusterType type = 2;
+    enum InstrumentClusterType {
+        IMAGE = 1;
+        ENUM = 2;
+    }
+    
+    optional ImageOptions image_options = 3;
+    message ImageOptions {
+        required int32 height = 1;
+        required int32 width = 2;
+        required int32 colour_depth_bits = 3;
+    }
+}
+
+message MediaPlaybackStatusService {
+    
+}
+
+message PhoneStatusService {
+    
+}
+
+message MediaBrowserService {
+    
+}
+
+message VendorExtensionService {
+    required string service_name = 1;
+    repeated string package_white_list = 2;
+    optional bytes data = 3;
+}
+
+message GenericNotificationService {
+    
+}
+
+message ChannelOpenRequest {
+    required sint32 priority = 1;
+    required int32 service_id = 2;
+}
+
+message ChannelOpenResponse {
+    required MessageStatus status = 1;
+}
+
+message ChannelCloseNotification {
+    
+}
+
+message NavFocusRequestNotification {
+    optional NavFocusType focus_type = 1;
+}
+
+message NavFocusNotification {
+    required NavFocusType focus_type = 1;
+}
+
+message PingRequest {
+    required int64 timestamp = 1;
+    optional bool bug_report = 2;
+    optional bytes data = 3;
+}
+
+message PingResponse {
+    required int64 timestamp = 1;
+    optional bytes data = 2;
+}
+
+message ByeByeRequest {
+    required ByeByeReason reason = 1;
+}
+
+message ByeByeResponse {
+    
+}
+
+message VoiceSessionNotification {
+    optional VoiceSessionStatus status = 1;
+}
+
+message CarConnectedDevicesRequest {
+    
+}
+
+message CarConnectedDevices {
+    repeated ConnectedDevice connected_devices = 1;
+    optional bool unsolicited = 2;
+    optional bool final_list = 3 [default = true];
+}
+
+message ConnectedDevice {
+    optional string device_name = 1;
+    optional int32 device_id = 2;
+}
+
+message UserSwitchRequest {
+    optional ConnectedDevice selected_device = 1;
+}
+
+message UserSwitchResponse {
+    optional UserSwitchStatus status = 1;
+    optional ConnectedDevice selected_device = 2;
+}
+
+message BatteryStatusNotification {
+    required uint32 battery_level = 1;
+    optional uint32 time_remaining_s = 2;
+    optional bool critical_battery = 3;
+}
+
+message CallAvailabilityStatus {
+    optional bool call_available = 1;
+}
+
+message SensorRequest {
+    required SensorType type = 1;
+    required int64 min_update_period = 2;
+}
+
+message SensorResponse {
+    required MessageStatus status = 1;
+}
+
+message SensorBatch {
+    repeated LocationData location_data = 1;
+    repeated CompassData compass_data = 2;
+    repeated SpeedData speed_data = 3;
+    repeated RpmData rpm_data = 4;
+    repeated OdometerData odometer_data = 5;
+    repeated FuelData fuel_data = 6;
+    repeated ParkingBrakeData parking_brake_data = 7;
+    repeated GearData gear_data = 8;
+    repeated DiagnosticsData diagnostics_data = 9;
+    repeated NightModeData night_mode_data = 10;
+    repeated EnvironmentData environment_data = 11;
+    repeated HvacData hvac_data = 12;
+    repeated DrivingStatusData driving_status_data = 13;
+    repeated DeadReckoningData dead_reckoning_data = 14;
+    repeated PassengerData passenger_data = 15;
+    repeated DoorData door_data = 16;
+    repeated LightData light_data = 17;
+    repeated TirePressureData tire_pressure_data = 18;
+    repeated AccelerometerData accelerometer_data = 19;
+    repeated GyroscopeData gyroscope_data = 20;
+    repeated GpsSatelliteData gps_satellite_data = 21;
+    repeated TollCardData toll_card_data = 22;
+}
+
+message SensorError {
+    required SensorType sensor_type = 1;
+    required SensorErrorType sensor_error_type = 2;
+}
+
+message LocationData {
+    optional uint64 timestamp = 1 [deprecated = true];
+    required int32 latitude_e7 = 2;
+    required int32 longitude_e7 = 3;
+    optional uint32 accuracy_e3 = 4;
+    optional int32 altitude_e2 = 5;
+    optional int32 speed_e3 = 6;
+    optional int32 bearing_e6 = 7;
+}
+
+message CompassData {
+    required int32 bearing_e6 = 1;
+    optional int32 pitch_e6 = 2;
+    optional int32 roll_e6 = 3;
+}
+
+message SpeedData {
+    required int32 speed_e3 = 1;
+    optional bool cruise_engaged = 2;
+    optional int32 cruise_set_speed = 4;
+}
+
+message RpmData {
+    required int32 rpm_e3 = 1;
+}
+
+message OdometerData {
+    required int32 kms_e1 = 1;
+    optional int32 trip_kms_e1 = 2;
+}
+
+message FuelData {
+    optional int32 fuel_level = 1;
+    optional int32 range = 2;
+    optional bool low_fuel_warning = 3;
+}
+
+message ParkingBrakeData {
+    required bool parking_brake = 1;
+}
+
+message GearData {
+    required Gear gear = 1;
+}
+
+message DiagnosticsData {
+    optional bytes dtc = 1;
+}
+
+message NightModeData {
+    optional bool night_mode = 1;
+}
+
+message EnvironmentData {
+    optional int32 temperature_e3 = 1;
+    optional int32 pressure_e3 = 2;
+    optional int32 rain = 3;
+}
+
+message HvacData {
+    optional int32 target_temperature_e3 = 1;
+    optional int32 current_temperature_e3 = 2;
+}
+
+message DrivingStatusData {
+    required int32 status = 1;
+}
+
+message DeadReckoningData {
+    optional int32 steering_angle_e1 = 1;
+    repeated int32 wheel_speed_e3 = 2;
+}
+
+message LightData {
+    optional HeadLightState head_light_state = 1;
+    optional TurnIndicatorState turn_indicator_state = 2;
+    optional bool hazard_lights_on = 3;
+}
+
+message PassengerData {
+    optional bool passenger_present = 1;
+}
+
+message DoorData {
+    optional bool hood_open = 1;
+    optional bool trunk_open = 2;
+    repeated bool door_open = 3;
+}
+
+message TirePressureData {
+    repeated int32 tire_pressures_e2 = 1;
+}
+
+message AccelerometerData {
+    optional int32 acceleration_x_e3 = 1;
+    optional int32 acceleration_y_e3 = 2;
+    optional int32 acceleration_z_e3 = 3;
+}
+
+message GyroscopeData {
+    optional int32 rotation_speed_x_e3 = 1;
+    optional int32 rotation_speed_y_e3 = 2;
+    optional int32 rotation_speed_z_e3 = 3;
+}
+
+message GpsSatellite {
+    required int32 prn = 1;
+    required int32 snr_e3 = 2;
+    required bool used_in_fix = 3;
+    optional int32 azimuth_e3 = 4;
+    optional int32 elevation_e3 = 5;
+}
+
+message GpsSatelliteData {
+    required int32 number_in_use = 1;
+    optional int32 number_in_view = 2;
+    repeated GpsSatellite satellites = 3;
+}
+
+message TollCardData {
+    required bool is_card_present = 1;
+}
+
+message Setup {
+    required MediaCodecType type = 1;
+}
+
+message Start {
+    required int32 session_id = 1;
+    required uint32 configuration_index = 2;
+}
+
+message Stop {
+    
+}
+
+message Config {
+    required Status status = 1;
+    enum Status {
+        STATUS_WAIT = 1;
+        STATUS_READY = 2;
+    }
+    
+    optional uint32 max_unacked = 2;
+    repeated uint32 configuration_indices = 3;
+}
+
+message Ack {
+    required int32 session_id = 1;
+    optional uint32 ack = 2;
+    repeated uint64 receive_timestamp_ns = 3;
+}
+
+message AudioUnderflowNotification {
+    required int32 session_id = 1;
+}
+
+message VideoFocusRequestNotification {
+    optional int32 disp_channel_id = 1 [deprecated = true];
+    optional VideoFocusMode mode = 2;
+    optional VideoFocusReason reason = 3;
+}
+
+message VideoFocusNotification {
+    optional VideoFocusMode focus = 1;
+    optional bool unsolicited = 2;
+}
+
+message UpdateUiConfigRequest {
+    optional UiConfig ui_config = 1;
+}
+
+message UpdateUiConfigReply {
+    optional UiConfig ui_config = 1;
+}
+
+message AudioFocusRequestNotification {
+    required AudioFocusRequestType request = 1;
+}
+
+message AudioFocusNotification {
+    required AudioFocusStateType focus_state = 1;
+    optional bool unsolicited = 2;
+}
+
+message MicrophoneRequest {
+    required bool open = 1;
+    optional bool anc_enabled = 2;
+    optional bool ec_enabled = 3;
+    optional int32 max_unacked = 4;
+}
+
+message MicrophoneResponse {
+    required int32 status = 1;
+    optional int32 session_id = 2;
+}
+
+message KeyBindingRequest {
+    repeated int32 keycodes = 1 [packed = true];
+}
+
+message KeyBindingResponse {
+    required int32 status = 1;
+}
+
+message InputReport {
+    required uint64 timestamp = 1;
+    optional int32 disp_channel_id = 2 [deprecated = true];
+    optional TouchEvent touch_event = 3;
+    optional KeyEvent key_event = 4;
+    optional AbsoluteEvent absolute_event = 5;
+    optional RelativeEvent relative_event = 6;
+    optional TouchEvent touchpad_event = 7;
+}
+
+message KeyEvent {
+    repeated Key keys = 1;
+    message Key {
+        required uint32 keycode = 1;
+        required bool down = 2;
+        required uint32 metastate = 3;
+        optional bool longpress = 4;
+    }
+}
+
+message TouchEvent {
+    repeated Pointer pointer_data = 1;
+    message Pointer {
+        required uint32 x = 1;
+        required uint32 y = 2;
+        required uint32 pointer_id = 3;
+    }
+    
+    optional uint32 action_index = 2;
+    optional PointerAction action = 3;
+}
+
+message AbsoluteEvent {
+    repeated Abs data = 1;
+    message Abs {
+        required uint32 keycode = 1;
+        required int32 value = 2;
+    }
+}
+
+message RelativeEvent {
+    repeated Rel data = 1;
+    message Rel {
+        required uint32 keycode = 1;
+        required int32 delta = 2;
+    }
+}
+
+message InputFeedback {
+    optional FeedbackEvent event = 1;
+}
+
+message BluetoothPairingRequest {
+    required string phone_address = 1;
+    required BluetoothPairingMethod pairing_method = 2;
+}
+
+message BluetoothPairingResponse {
+    required MessageStatus status = 1;
+    required bool already_paired = 2;
+}
+
+message BluetoothAuthenticationData {
+    required string auth_data = 1;
+    optional BluetoothPairingMethod pairing_method = 2;
+}
+
+message BluetoothAuthenticationResult {
+    required MessageStatus status = 1;
+}
+
+message WifiProjectionService {
+    optional string car_wifi_bssid = 1;
+}
+
+message WifiCredentialsRequest {
+    required string ip_address = 1;
+    optional uint32 port = 2;
+}
+
+message WifiSecurityReponse {
+    required string ssid = 1; //mo15384a
+    required string key = 2; //mo15385b
+    required string bssid = 3; //mo15386c
+    required WifiSecurityMode security_mode = 4;
+    required AccessPointType access_point_type = 5;
+    }
+
+message WifiCredentialsResponse {
+    optional string car_wifi_password = 1;
+    optional WifiSecurityMode car_wifi_security_mode = 2;
+    optional string car_wifi_ssid = 3;
+    repeated int32 supported_wifi_channels = 4;
+    optional AccessPointType access_point_type = 5;
+}
+
+message RadioStateNotification {
+    required bool radio_source_enabled = 1;
+    optional bool radio_muted = 2;
+    required int32 active_radio_id = 3;
+    required RadioStationInfo station_info = 4;
+    repeated RadioStationInfo program_list = 5;
+    repeated StationPresetList station_preset_lists = 6;
+}
+
+message RadioSourceRequest {
+    
+}
+
+message RadioSourceResponse {
+    optional MessageStatus status = 1;
+    required bool radio_source_enabled = 2;
+}
+
+message SelectActiveRadioRequest {
+    required int32 radio_id = 1;
+}
+
+message ActiveRadioNotification {
+    optional MessageStatus status = 1;
+    required int32 radio_id = 2;
+    optional RadioStationInfo station_info = 3;
+}
+
+message StepChannelRequest {
+    required int32 radio_id = 1;
+    required bool up = 2;
+    required bool skip_sub_channel = 3;
+}
+
+message StepChannelResponse {
+    optional MessageStatus status = 1;
+    required int32 radio_id = 2;
+}
+
+message SeekStationRequest {
+    required int32 radio_id = 1;
+    required bool up = 2;
+    required bool skip_sub_channel = 3;
+}
+
+message SeekStationResponse {
+    optional MessageStatus status = 1;
+    required int32 radio_id = 2;
+}
+
+message ScanStationsRequest {
+    required int32 radio_id = 1;
+    required bool start = 2;
+    required bool up = 3;
+    required bool skip_sub_channel = 4;
+}
+
+message ScanStationsResponse {
+    optional MessageStatus status = 1;
+    required int32 radio_id = 2;
+    optional bool started = 3;
+}
+
+message TuneToStationRequest {
+    required int32 radio_id = 1;
+    required int32 channel = 2;
+    optional int32 sub_channel = 3;
+}
+
+message TuneToStationResponse {
+    required MessageStatus status = 1;
+    required int32 radio_id = 2;
+}
+
+message RadioStationInfoNotification {
+    required int32 radio_id = 1;
+    required RadioStationInfo station_info = 2;
+}
+
+message RadioStationInfo {
+    required RadioType type = 1;
+    required int32 channel = 2;
+    optional int32 sub_channel = 3;
+    optional RadioStationMetaData meta_data = 4;
+}
+
+message RadioStationMetaData {
+    optional int32 audio_channels = 1;
+    optional int32 signal_quality = 2;
+    optional RdsData rds = 3;
+    optional HdRadioStationInfo hd_station_info = 4;
+}
+
+message RdsData {
+    repeated int32 alternative_frequencies = 1;
+    optional int32 program_id = 2;
+    optional int32 music_speech_switch = 3;
+    optional string program_service_name = 4;
+    optional int32 program_type = 5;
+    optional string program_type_name = 6;
+    optional string radio_text = 7;
+    optional bool traffic_program_flag = 8;
+    optional bool traffic_announcement_flag = 9;
+}
+
+message HdRadioStationInfo {
+    optional HdAcquisionState acquisition_state = 1;
+    optional int32 digital_signal_strength = 2;
+    optional HdRadioPsdData psd = 3;
+    optional HdRadioSisData sis = 4;
+}
+
+message HdRadioPsdData {
+    optional string title = 1;
+    optional string artist = 2;
+    optional string album = 3;
+    optional string genre = 4;
+    optional HdRadioComment comment = 5;
+    optional HdRadioCommercial commercial = 6;
+    optional HdRadioArtistExperience artist_experience = 7;
+}
+
+message HdRadioComment {
+    optional string description = 1;
+    optional string text = 2;
+}
+
+message HdRadioCommercial {
+    optional int32 encoding = 1;
+    optional string price = 2;
+    optional string valid = 3;
+    optional string url = 4;
+    optional int32 received = 5;
+    optional string seller = 6;
+    optional string description = 7;
+}
+
+message HdRadioArtistExperience {
+    optional bytes image = 1;
+}
+
+message HdRadioSisData {
+    optional int32 station_id = 1;
+    optional string station_name_short = 2;
+    optional string station_name_long = 3;
+    optional Location station_location = 4;
+    optional string station_message = 5;
+    optional string service_info_message = 6;
+    optional string universal_short_station_name_slogan = 7;
+}
+
+message Location {
+    required double longitude = 1;
+    required double latitude = 2;
+}
+
+message GetProgramListRequest {
+    required int32 radio_id = 1;
+}
+
+message GetProgramListResponse {
+    required MessageStatus status = 1;
+    required int32 radio_id = 2;
+    required bool completed = 3;
+    repeated RadioStationInfo program_list = 4;
+}
+
+message CancelRadioOperationsRequest {
+    required int32 radio_id = 1;
+}
+
+message CancelRadioOperationsResponse {
+    required MessageStatus status = 1;
+    required int32 radio_id = 2;
+}
+
+message ConfigureChannelSpacingRequest {
+    required int32 radio_id = 1;
+    required int32 channel_spacing = 2;
+}
+
+message ConfigureChannelSpacingResponse {
+    required MessageStatus status = 1;
+    required int32 radio_id = 2;
+    required int32 channel_spacing = 3;
+}
+
+message StationPresetsNotification {
+    repeated StationPresetList preset_lists = 2;
+}
+
+message StationPresetList {
+    optional string name = 1;
+    repeated int32 restricted_station_types = 2;
+    repeated StationPreset presets = 3;
+}
+
+message StationPreset {
+    required RadioType type = 1;
+    required int32 channel = 2;
+    optional int32 sub_channel = 3;
+}
+
+message GetTrafficUpdateRequest {
+    required int32 radio_id = 1;
+}
+
+message GetTrafficUpdateResponse {
+    required MessageStatus status = 1;
+    required int32 radio_id = 2;
+    repeated TrafficIncident incidents = 3;
+}
+
+message TrafficIncident {
+    required int32 event_code = 1;
+    required Location location = 2;
+    required int32 expected_incident_duration = 3;
+}
+
+message MuteRadioRequest {
+    optional int32 radio_id = 1;
+    required bool mute = 2;
+}
+
+message MuteRadioResponse {
+    optional MessageStatus status = 1;
+    optional int32 radio_id = 2;
+    optional bool muted = 3;
+}
+
+message NavigationStatusStart {
+    
+}
+
+message NavigationStatusStop {
+    
+}
+
+message NavigationStatus {
+    required NavigationStatusEnum status = 1;
+    enum NavigationStatusEnum {
+        UNAVAILABLE = 0;
+        ACTIVE = 1;
+        INACTIVE = 2;
+        REROUTING = 3;
+    }
+}
+
+message NavigationNextTurnEvent {
+    option deprecated = true;
+    required string road = 1;
+    
+    optional TurnSide turn_side = 2;
+    enum TurnSide {
+        LEFT = 1;
+        RIGHT = 2;
+        UNSPECIFIED = 3;
+    }
+    
+    optional NextTurnEnum event = 3;
+    enum NextTurnEnum {
+        UNKNOWN = 0;
+        DEPART = 1;
+        NAME_CHANGE = 2;
+        SLIGHT_TURN = 3;
+        TURN = 4;
+        SHARP_TURN = 5;
+        U_TURN = 6;
+        ON_RAMP = 7;
+        OFF_RAMP = 8;
+        FORK = 9;
+        MERGE = 10;
+        ROUNDABOUT_ENTER = 11;
+        ROUNDABOUT_EXIT = 12;
+        ROUNDABOUT_ENTER_AND_EXIT = 13;
+        STRAIGHT = 14;
+        FERRY_BOAT = 16;
+        FERRY_TRAIN = 17;
+        DESTINATION = 19;
+    }
+    
+    optional bytes image = 4;
+    optional int32 turn_number = 5;
+    optional int32 turn_angle = 6;
+}
+
+message NavigationNextTurnDistanceEvent {
+    option deprecated = true;
+    required int32 distance_meters = 1;
+    required int32 time_to_turn_seconds = 2;
+    optional int32 display_distance_e3 = 3;
+    
+    optional DistanceUnits display_distance_unit = 4;
+    enum DistanceUnits {
+        UNKNOWN_DISTANCE_UNIT = 0;
+        METERS = 1;
+        KILOMETERS = 2;
+        KILOMETERS_P1 = 3;
+        MILES = 4;
+        MILES_P1 = 5;
+        FEET = 6;
+        YARDS = 7;
+    }
+}
+
+message NavigationState {
+    repeated NavigationStep steps = 1;
+    repeated NavigationDestination destinations = 2;
+}
+
+message NavigationStep {
+    optional NavigationManeuver maneuver = 1;
+    optional NavigationRoad road = 2;
+    repeated NavigationLane lanes = 3;
+    optional NavigationCue cue = 4;
+}
+
+message NavigationManeuver {
+    optional NavigationType type = 1;
+    enum NavigationType {
+        UNKNOWN = 0;
+        DEPART = 1;
+        NAME_CHANGE = 2;
+        KEEP_LEFT = 3;
+        KEEP_RIGHT = 4;
+        TURN_SLIGHT_LEFT = 5;
+        TURN_SLIGHT_RIGHT = 6;
+        TURN_NORMAL_LEFT = 7;
+        TURN_NORMAL_RIGHT = 8;
+        TURN_SHARP_LEFT = 9;
+        TURN_SHARP_RIGHT = 10;
+        U_TURN_LEFT = 11;
+        U_TURN_RIGHT = 12;
+        ON_RAMP_SLIGHT_LEFT = 13;
+        ON_RAMP_SLIGHT_RIGHT = 14;
+        ON_RAMP_NORMAL_LEFT = 15;
+        ON_RAMP_NORMAL_RIGHT = 16;
+        ON_RAMP_SHARP_LEFT = 17;
+        ON_RAMP_SHARP_RIGHT = 18;
+        ON_RAMP_U_TURN_LEFT = 19;
+        ON_RAMP_U_TURN_RIGHT = 20;
+        OFF_RAMP_SLIGHT_LEFT = 21;
+        OFF_RAMP_SLIGHT_RIGHT = 22;
+        OFF_RAMP_NORMAL_LEFT = 23;
+        OFF_RAMP_NORMAL_RIGHT = 24;
+        FORK_LEFT = 25;
+        FORK_RIGHT = 26;
+        MERGE_LEFT = 27;
+        MERGE_RIGHT = 28;
+        MERGE_SIDE_UNSPECIFIED = 29;
+        ROUNDABOUT_ENTER = 30;
+        ROUNDABOUT_EXIT = 31;
+        ROUNDABOUT_ENTER_AND_EXIT_CW = 32;
+        ROUNDABOUT_ENTER_AND_EXIT_CW_WITH_ANGLE = 33;
+        ROUNDABOUT_ENTER_AND_EXIT_CCW = 34;
+        ROUNDABOUT_ENTER_AND_EXIT_CCW_WITH_ANGLE = 35;
+        STRAIGHT = 36;
+        FERRY_BOAT = 37;
+        FERRY_TRAIN = 38;
+        DESTINATION = 39;
+        DESTINATION_STRAIGHT = 40;
+        DESTINATION_LEFT = 41;
+        DESTINATION_RIGHT = 42;
+    }
+    
+    optional int32 roundabout_exit_number = 2;
+    optional int32 roundabout_exit_angle = 3;
+}
+
+message NavigationCue {
+    repeated string alternate_text = 1;
+}
+
+message NavigationLane {
+    repeated LaneDirection lane_directions = 1;
+    message LaneDirection {
+        optional Shape shape = 1;
+        enum Shape {
+            UNKNOWN = 0;
+            STRAIGHT = 1;
+            SLIGHT_LEFT = 2;
+            SLIGHT_RIGHT = 3;
+            NORMAL_LEFT = 4;
+            NORMAL_RIGHT = 5;
+            SHARP_LEFT = 6;
+            SHARP_RIGHT = 7;
+            U_TURN_LEFT = 8;
+            U_TURN_RIGHT = 9;
+        }
+        
+        optional bool is_highlighted = 2;
+    }
+}
+
+message NavigationDestination {
+    optional string address = 1;
+}
+
+message NavigationCurrentPosition {
+    optional NavigationStepDistance step_distance = 1;
+    repeated NavigationDestinationDistance destination_distances = 2;
+    optional NavigationRoad current_road = 3;
+}
+
+message NavigationStepDistance {
+    optional NavigationDistance distance = 1;
+    optional int64 time_to_step_seconds = 2;
+}
+
+message NavigationDestinationDistance {
+    optional NavigationDistance distance = 1;
+    optional string estimated_time_at_arrival = 2;
+    optional int64 time_to_arrival_seconds = 3;
+}
+
+message NavigationRoad {
+    optional string name = 1;
+}
+
+message NavigationDistance {
+    optional int32 meters = 1;
+    optional string display_value = 2;
+    
+    optional DistanceUnits display_units = 3;
+    enum DistanceUnits {
+        UNKNOWN_DISTANCE_UNIT = 0;
+        METERS = 1;
+        KILOMETERS = 2;
+        KILOMETERS_P1 = 3;
+        MILES = 4;
+        MILES_P1 = 5;
+        FEET = 6;
+        YARDS = 7;
+    }
+}
+
+message InstrumentClusterInput {
+    required InstrumentClusterAction action = 1;
+    enum InstrumentClusterAction {
+        UNKNOWN = 0;
+        UP = 1;
+        DOWN = 2;
+        LEFT = 3;
+        RIGHT = 4;
+        ENTER = 5;
+        BACK = 6;
+        CALL = 7;
+    }
+}
+
+message MediaPlaybackStatus {
+    optional State state = 1;
+    enum State {
+        STOPPED = 1;
+        PLAYING = 2;
+        PAUSED = 3;
+    }
+    
+    optional string media_source = 2;
+    optional uint32 playback_seconds = 3;
+    optional bool shuffle = 4;
+    optional bool repeat = 5;
+    optional bool repeat_one = 6;
+}
+
+message MediaPlaybackMetadata {
+    optional string song = 1;
+    optional string artist = 2;
+    optional string album = 3;
+    optional bytes album_art = 4;
+    optional string playlist = 5;
+    optional uint32 duration_seconds = 6;
+    optional int32 rating = 7;
+}
+
+message PhoneStatus {
+    repeated Call calls = 1;
+    message Call {
+        required State phone_state = 1;
+        required uint32 call_duration_seconds = 2;
+        optional string caller_number = 3;
+        optional string caller_id = 4;
+        optional string caller_number_type = 5;
+        optional bytes caller_thumbnail = 6;
+    }
+    
+    optional uint32 signal_strength = 2;
+    
+    enum State {
+        UNKNOWN = 0;
+        IN_CALL = 1;
+        ON_HOLD = 2;
+        INACTIVE = 3;
+        INCOMING = 4;
+        CONFERENCED = 5;
+        MUTED = 6;
+    }
+}
+
+message PhoneStatusInput {
+    required InstrumentClusterInput input = 1;
+    optional string caller_number = 2;
+    optional string caller_id = 3;
+}
+
+message MediaRootNode {
+    required string path = 1;
+    repeated MediaSource media_sources = 2;
+}
+
+message MediaSource {
+    required string path = 1;
+    required string name = 2;
+    optional bytes album_art = 3;
+}
+
+message MediaSourceNode {
+    required MediaSource source = 1;
+    optional int32 start = 2;
+    optional int32 total = 3;
+    repeated MediaList lists = 4;
+}
+
+message MediaList {
+    required string path = 1;
+    
+    required Type type = 2;
+    enum Type {
+        UNKNOWN = 0;
+        PLAYLIST = 1;
+        ALBUM = 2;
+        ARTIST = 3;
+        STATION = 4;
+        GENRE = 5;
+    }
+    
+    optional string name = 3;
+    optional bytes album_art = 4;
+}
+
+message MediaListNode {
+    required MediaList list = 1;
+    optional int32 start = 2;
+    optional int32 total = 3;
+    repeated MediaSong songs = 4;
+}
+
+message MediaSong {
+    required string path = 1;
+    required string name = 2;
+    optional string artist = 3;
+    optional string album = 4;
+}
+
+message MediaSongNode {
+    required MediaSong song = 1;
+    optional bytes album_art = 2;
+    optional uint32 duration_seconds = 3;
+}
+
+message MediaGetNode {
+    required string path = 1;
+    optional int32 start = 2;
+    optional bool get_album_art = 3 [default = true];
+}
+
+message MediaBrowserInput {
+    required InstrumentClusterInput input = 1;
+    required string path = 2;
+}
+
+message GalVerificationSetSensor {
+    optional SensorBatch sensors = 1;
+}
+
+message GalVerificationMediaSinkStatus {
+    required int32 channel = 1;
+    required Config.Status status = 2;
+}
+
+message GalVerificationVideoFocus {
+    required VideoFocusMode video_focus_mode = 1;
+    optional bool deny = 2;
+    optional bool unsolicited = 3;
+}
+
+message GalVerificationAudioFocus {
+    required AudioFocusStateType audio_focus_state = 1;
+    required int32 channel = 2;
+    optional bool unsolicited = 3;
+}
+
+message GalVerificationInjectInput {
+    required InputReport input = 1;
+}
+
+message GalVerificationBugReportRequest {
+    
+}
+
+message GalVerificationBugReportResponse {
+    required string bug_report = 1;
+}
+
+message GalVerificationScreenCaptureRequest {
+    
+}
+
+message GalVerificationScreenCaptureResponse {
+    required bytes screen_capture = 1;
+}
+
+message GalVerificationDisplayInformationRequest {
+    
+}
+
+message GalVerificationDisplayInformationResponse {
+    required int32 native_width = 1;
+    required int32 native_height = 2;
+}
+
+message GenericNotificationSubscribe {
+    
+}
+
+message GenericNotificationUnsubscribe {
+    
+}
+
+message GenericNotificationMessage {
+    optional string id = 1;
+    optional string text = 2;
+    optional bytes icon = 3;
+}
+
+message GenericNotificationAck {
+    optional string id = 1;
+    optional bool handled = 2;
+}
+
+message GoogleDiagnosticsBugReportRequest {
+    required int32 token = 1;
+}
+
+message GoogleDiagnosticsBugReportResponse {
+    optional string bug_report = 1;
+    repeated int32 tokens = 2;
+}
+
+enum ControlMessageType {
+    MESSAGE_VERSION_REQUEST = 1;
+    MESSAGE_VERSION_RESPONSE = 2;
+    MESSAGE_ENCAPSULATED_SSL = 3;
+    MESSAGE_AUTH_COMPLETE = 4;
+    MESSAGE_SERVICE_DISCOVERY_REQUEST = 5;
+    MESSAGE_SERVICE_DISCOVERY_RESPONSE = 6;
+    MESSAGE_CHANNEL_OPEN_REQUEST = 7;
+    MESSAGE_CHANNEL_OPEN_RESPONSE = 8;
+    MESSAGE_CHANNEL_CLOSE_NOTIFICATION = 9;
+    MESSAGE_PING_REQUEST = 11;
+    MESSAGE_PING_RESPONSE = 12;
+    MESSAGE_NAV_FOCUS_REQUEST = 13;
+    MESSAGE_NAV_FOCUS_NOTIFICATION = 14;
+    MESSAGE_BYEBYE_REQUEST = 15;
+    MESSAGE_BYEBYE_RESPONSE = 16;
+    MESSAGE_VOICE_SESSION_NOTIFICATION = 17;
+    MESSAGE_AUDIO_FOCUS_REQUEST = 18;
+    MESSAGE_AUDIO_FOCUS_NOTIFICATION = 19;
+    MESSAGE_CAR_CONNECTED_DEVICES_REQUEST = 20;
+    MESSAGE_CAR_CONNECTED_DEVICES_RESPONSE = 21;
+    MESSAGE_USER_SWITCH_REQUEST = 22;
+    MESSAGE_BATTERY_STATUS_NOTIFICATION = 23;
+    MESSAGE_CALL_AVAILABILITY_STATUS = 24;
+    MESSAGE_USER_SWITCH_RESPONSE = 25;
+    MESSAGE_SERVICE_DISCOVERY_UPDATE = 26;
+    MESSAGE_UNEXPECTED_MESSAGE = 255;
+    MESSAGE_FRAMING_ERROR = 65535;
+}
+
+enum FragInfo {
+    FRAG_CONTINUATION = 0;
+    FRAG_FIRST = 1;
+    FRAG_LAST = 2;
+    FRAG_UNFRAGMENTED = 3;
+}
+
+enum DriverPosition {
+    DRIVER_POSITION_LEFT = 0;
+    DRIVER_POSITION_RIGHT = 1;
+    DRIVER_POSITION_CENTER = 2;
+    DRIVER_POSITION_UNKNOWN = 3;
+}
+
+enum SessionConfiguration {
+    UI_CONFIG_HIDE_CLOCK = 1;
+    UI_CONFIG_HIDE_PHONE_SIGNAL = 2;
+    UI_CONFIG_HIDE_BATTERY_LEVEL = 4;
+    CAN_PLAY_NATIVE_MEDIA_DURING_VR = 8;
+}
+
+enum LocationCharacterization {
+    PRIOR_LOCATIONS = 1;
+    GYROSCOPE_FUSION = 2;
+    ACCELEROMETER_FUSION = 4;
+    COMPASS_FUSION = 8;
+    WHEEL_SPEED_FUSION = 16;
+    STEERING_ANGLE_FUSION = 32;
+    CAR_SPEED_FUSION = 64;
+    DEAD_RECKONED = 128;
+    RAW_GPS_ONLY = 256;
+}
+
+enum SensorType {
+    SENSOR_LOCATION = 1;
+    SENSOR_COMPASS = 2;
+    SENSOR_SPEED = 3;
+    SENSOR_RPM = 4;
+    SENSOR_ODOMETER = 5;
+    SENSOR_FUEL = 6;
+    SENSOR_PARKING_BRAKE = 7;
+    SENSOR_GEAR = 8;
+    SENSOR_OBDII_DIAGNOSTIC_CODE = 9;
+    SENSOR_NIGHT_MODE = 10;
+    SENSOR_ENVIRONMENT_DATA = 11;
+    SENSOR_HVAC_DATA = 12;
+    SENSOR_DRIVING_STATUS_DATA = 13;
+    SENSOR_DEAD_RECKONING_DATA = 14;
+    SENSOR_PASSENGER_DATA = 15;
+    SENSOR_DOOR_DATA = 16;
+    SENSOR_LIGHT_DATA = 17;
+    SENSOR_TIRE_PRESSURE_DATA = 18;
+    SENSOR_ACCELEROMETER_DATA = 19;
+    SENSOR_GYROSCOPE_DATA = 20;
+    SENSOR_GPS_SATELLITE_DATA = 21;
+    SENSOR_TOLL_CARD = 22;
+}
+
+enum FuelType {
+    FUEL_TYPE_UNKNOWN = 0;
+    FUEL_TYPE_UNLEADED = 1;
+    FUEL_TYPE_LEADED = 2;
+    FUEL_TYPE_DIESEL_1 = 3;
+    FUEL_TYPE_DIESEL_2 = 4;
+    FUEL_TYPE_BIODIESEL = 5;
+    FUEL_TYPE_E85 = 6;
+    FUEL_TYPE_LPG = 7;
+    FUEL_TYPE_CNG = 8;
+    FUEL_TYPE_LNG = 9;
+    FUEL_TYPE_ELECTRIC = 10;
+    FUEL_TYPE_HYDROGEN = 11;
+    FUEL_TYPE_OTHER = 12;
+}
+
+enum EvConnectorType {
+    EV_CONNECTOR_TYPE_UNKNOWN = 0;
+    EV_CONNECTOR_TYPE_J1772 = 1;
+    EV_CONNECTOR_TYPE_MENNEKES = 2;
+    EV_CONNECTOR_TYPE_CHADEMO = 3;
+    EV_CONNECTOR_TYPE_COMBO_1 = 4;
+    EV_CONNECTOR_TYPE_COMBO_2 = 5;
+    EV_CONNECTOR_TYPE_TESLA_ROADSTER = 6 [deprecated = true];
+    EV_CONNECTOR_TYPE_TESLA_HPWC = 7 [deprecated = true];
+    EV_CONNECTOR_TYPE_TESLA_SUPERCHARGER = 8;
+    EV_CONNECTOR_TYPE_GBT = 9;
+    EV_CONNECTOR_TYPE_OTHER = 101;
+}
+
+enum VideoCodecResolutionType {
+    VIDEO_800x480 = 1;
+    VIDEO_1280x720 = 2;
+    VIDEO_1920x1080 = 3;
+    VIDEO_2560x1440 = 4;
+    VIDEO_3840x2160 = 5;
+    VIDEO_720x1280 = 6;
+    VIDEO_1080x1920 = 7;
+    VIDEO_1440x2560 = 8;
+    VIDEO_2160x3840 = 9;
+}
+
+enum VideoFrameRateType {
+    VIDEO_FPS_60 = 1;
+    VIDEO_FPS_30 = 2;
+}
+
+enum MediaCodecType {
+    MEDIA_CODEC_AUDIO_PCM = 1;
+    MEDIA_CODEC_AUDIO_AAC_LC = 2;
+    MEDIA_CODEC_VIDEO_H264_BP = 3;
+    MEDIA_CODEC_AUDIO_AAC_LC_ADTS = 4;
+    MEDIA_CODEC_VIDEO_VP9 = 5;
+    MEDIA_CODEC_VIDEO_AV1 = 6;
+    MEDIA_CODEC_VIDEO_H265 = 7;
+}
+
+enum AudioStreamType {
+    AUDIO_STREAM_GUIDANCE = 1;
+    AUDIO_STREAM_SYSTEM_AUDIO = 2;
+    AUDIO_STREAM_MEDIA = 3;
+    AUDIO_STREAM_TELEPHONY = 4;
+}
+
+enum DisplayType {
+    DISPLAY_TYPE_MAIN = 0;
+    DISPLAY_TYPE_CLUSTER = 1;
+    DISPLAY_TYPE_AUXILIARY = 2;
+}
+
+enum UiTheme {
+    UI_THEME_AUTOMATIC = 0;
+    UI_THEME_LIGHT = 1;
+    UI_THEME_DARK = 2;
+}
+
+enum TouchScreenType {
+    CAPACITIVE = 1;
+    RESISTIVE = 2;
+    INFRARED = 3;
+}
+
+enum BluetoothPairingMethod {
+    BLUETOOTH_PAIRING_UNAVAILABLE = -1;
+    BLUETOOTH_PAIRING_OOB = 1;
+    BLUETOOTH_PAIRING_NUMERIC_COMPARISON = 2;
+    BLUETOOTH_PAIRING_PASSKEY_ENTRY = 3;
+    BLUETOOTH_PAIRING_PIN = 4;
+}
+
+enum TrafficServiceType {
+    NO_TRAFFIC_SERVICE = 0;
+    TMC_TRAFFIC_SERVICE = 1;
+}
+
+enum RdsType {
+    NO_RDS = 0;
+    RDS = 1;
+    RBDS = 2;
+}
+
+enum RadioType {
+    AM_RADIO = 0;
+    FM_RADIO = 1;
+    AM_HD_RADIO = 2;
+    FM_HD_RADIO = 3;
+    DAB_RADIO = 4;
+    XM_RADIO = 5;
+}
+
+enum ItuRegion {
+    RADIO_REGION_NONE = 0;
+    RADIO_REGION_ITU_1 = 1;
+    RADIO_REGION_ITU_2 = 2;
+    RADIO_REGION_OIRT = 3;
+    RADIO_REGION_JAPAN = 4;
+    RADIO_REGION_KOREA = 5;
+}
+
+enum NavFocusType {
+    NAV_FOCUS_NATIVE = 1;
+    NAV_FOCUS_PROJECTED = 2;
+}
+
+enum ByeByeReason {
+    USER_SELECTION = 1;
+    DEVICE_SWITCH = 2;
+    NOT_SUPPORTED = 3;
+    NOT_CURRENTLY_SUPPORTED = 4;
+    PROBE_SUPPORTED = 5;
+}
+
+enum VoiceSessionStatus {
+    VOICE_SESSION_START = 1;
+    VOICE_SESSION_END = 2;
+}
+
+enum UserSwitchStatus {
+    STATUS_OK = 0;
+    ERROR_NO_RFCOMM_CONNECTION = -1;
+    ERROR_BT_CLOSED_BEFORE_START = -2;
+    ERROR_BT_CLOSED_AFTER_START = -3;
+    ERROR_INCOMPATIBLE_PHONE_PROTOCOL_VERSION = -4;
+    ERROR_PHONE_UNABLE_TO_CONNECT_WIFI = -5;
+    ERROR_MULTIPLE_USER_SWITCH_REQUEST = -6;
+    ERROR_HU_INTERNAL = -7;
+    ERROR_INVALID_REQUEST = -8;
+    ERROR_REQUEST_TIMEOUT = -9;
+}
+
+enum SensorErrorType {
+    SENSOR_OK = 1;
+    SENSOR_ERROR_TRANSIENT = 2;
+    SENSOR_ERROR_PERMANENT = 3;
+}
+
+enum Gear {
+    GEAR_NEUTRAL = 0;
+    GEAR_1 = 1;
+    GEAR_2 = 2;
+    GEAR_3 = 3;
+    GEAR_4 = 4;
+    GEAR_5 = 5;
+    GEAR_6 = 6;
+    GEAR_7 = 7;
+    GEAR_8 = 8;
+    GEAR_9 = 9;
+    GEAR_10 = 10;
+    GEAR_DRIVE = 100;
+    GEAR_PARK = 101;
+    GEAR_REVERSE = 102;
+}
+
+enum DrivingStatus {
+    DRIVE_STATUS_UNRESTRICTED = 0;
+    DRIVE_STATUS_NO_VIDEO = 1;
+    DRIVE_STATUS_NO_KEYBOARD_INPUT = 2;
+    DRIVE_STATUS_NO_VOICE_INPUT = 4;
+    DRIVE_STATUS_NO_CONFIG = 8;
+    DRIVE_STATUS_LIMIT_MESSAGE_LEN = 16;
+}
+
+enum HeadLightState {
+    HEAD_LIGHT_STATE_OFF = 1;
+    HEAD_LIGHT_STATE_ON = 2;
+    HEAD_LIGHT_STATE_HIGH = 3;
+}
+
+enum TurnIndicatorState {
+    TURN_INDICATOR_NONE = 1;
+    TURN_INDICATOR_LEFT = 2;
+    TURN_INDICATOR_RIGHT = 3;
+}
+
+enum SensorMessageId {
+    SENSOR_MESSAGE_REQUEST = 32769;
+    SENSOR_MESSAGE_RESPONSE = 32770;
+    SENSOR_MESSAGE_BATCH = 32771;
+    SENSOR_MESSAGE_ERROR = 32772;
+}
+
+enum VideoFocusReason {
+    UNKNOWN = 0;
+    PHONE_SCREEN_OFF = 1;
+    LAUNCH_NATIVE = 2;
+}
+
+enum VideoFocusMode {
+    VIDEO_FOCUS_PROJECTED = 1;
+    VIDEO_FOCUS_NATIVE = 2;
+    VIDEO_FOCUS_NATIVE_TRANSIENT = 3;
+    VIDEO_FOCUS_PROJECTED_NO_INPUT_FOCUS = 4;
+}
+
+enum AudioFocusRequestType {
+    AUDIO_FOCUS_GAIN = 1;
+    AUDIO_FOCUS_GAIN_TRANSIENT = 2;
+    AUDIO_FOCUS_GAIN_TRANSIENT_MAY_DUCK = 3;
+    AUDIO_FOCUS_RELEASE = 4;
+}
+
+enum AudioFocusStateType {
+    AUDIO_FOCUS_STATE_INVALID = 0;
+    AUDIO_FOCUS_STATE_GAIN = 1;
+    AUDIO_FOCUS_STATE_GAIN_TRANSIENT = 2;
+    AUDIO_FOCUS_STATE_LOSS = 3;
+    AUDIO_FOCUS_STATE_LOSS_TRANSIENT_CAN_DUCK = 4;
+    AUDIO_FOCUS_STATE_LOSS_TRANSIENT = 5;
+    AUDIO_FOCUS_STATE_GAIN_MEDIA_ONLY = 6;
+    AUDIO_FOCUS_STATE_GAIN_TRANSIENT_GUIDANCE_ONLY = 7;
+}
+
+enum MediaMessageId {
+    MEDIA_MESSAGE_DATA = 0;
+    MEDIA_MESSAGE_CODEC_CONFIG = 1;
+    MEDIA_MESSAGE_SETUP = 32768;
+    MEDIA_MESSAGE_START = 32769;
+    MEDIA_MESSAGE_STOP = 32770;
+    MEDIA_MESSAGE_CONFIG = 32771;
+    MEDIA_MESSAGE_ACK = 32772;
+    MEDIA_MESSAGE_MICROPHONE_REQUEST = 32773;
+    MEDIA_MESSAGE_MICROPHONE_RESPONSE = 32774;
+    MEDIA_MESSAGE_VIDEO_FOCUS_REQUEST = 32775;
+    MEDIA_MESSAGE_VIDEO_FOCUS_NOTIFICATION = 32776;
+    MEDIA_MESSAGE_UPDATE_UI_CONFIG_REQUEST = 32777;
+    MEDIA_MESSAGE_UPDATE_UI_CONFIG_REPLY = 32778;
+    MEDIA_MESSAGE_AUDIO_UNDERFLOW_NOTIFICATION = 32779;
+}
+
+enum PointerAction {
+    ACTION_DOWN = 0;
+    ACTION_UP = 1;
+    ACTION_MOVED = 2;
+    ACTION_POINTER_DOWN = 5;
+    ACTION_POINTER_UP = 6;
+}
+
+enum FeedbackEvent {
+    FEEDBACK_SELECT = 1;
+    FEEDBACK_FOCUS_CHANGE = 2;
+    FEEDBACK_DRAG_SELECT = 3;
+    FEEDBACK_DRAG_START = 4;
+    FEEDBACK_DRAG_END = 5;
+}
+
+enum InputMessageId {
+    INPUT_MESSAGE_INPUT_REPORT = 32769;
+    INPUT_MESSAGE_KEY_BINDING_REQUEST = 32770;
+    INPUT_MESSAGE_KEY_BINDING_RESPONSE = 32771;
+    INPUT_MESSAGE_INPUT_FEEDBACK = 32772;
+}
+
+enum BluetoothMessageId {
+    BLUETOOTH_MESSAGE_PAIRING_REQUEST = 32769;
+    BLUETOOTH_MESSAGE_PAIRING_RESPONSE = 32770;
+    BLUETOOTH_MESSAGE_AUTHENTICATION_DATA = 32771;
+    BLUETOOTH_MESSAGE_AUTHENTICATION_RESULT = 32772;
+}
+
+enum WifiSecurityMode {
+    UNKNOWN_SECURITY_MODE = 0;
+    OPEN = 1;
+    WEP_64 = 2;
+    WEP_128 = 3;
+    WPA_PERSONAL = 4;
+    WPA2_PERSONAL = 5;
+    WPA_WPA2_PERSONAL = 6;
+    WPA_ENTERPRISE = 7;
+    WPA2_ENTERPRISE = 8;
+    WPA_WPA2_ENTERPRISE = 9;
+}
+
+enum AccessPointType {
+    STATIC = 0;
+    DYNAMIC = 1;
+}
+
+enum WifiProjectionMessageId {
+    WIFI_MESSAGE_CREDENTIALS_REQUEST = 32769;
+    WIFI_MESSAGE_CREDENTIALS_RESPONSE = 32770;
+}
+
+enum RadioMessageId {
+    RADIO_MESSAGE_ACTIVE_RADIO_NOTIFICATION = 32769;
+    RADIO_MESSAGE_SELECT_ACTIVE_RADIO_REQUEST = 32770;
+    RADIO_MESSAGE_STEP_CHANNEL_REQUEST = 32771;
+    RADIO_MESSAGE_STEP_CHANNEL_RESPONSE = 32772;
+    RADIO_MESSAGE_SEEK_STATION_REQUEST = 32773;
+    RADIO_MESSAGE_SEEK_STATION_RESPONSE = 32774;
+    RADIO_MESSAGE_SCAN_STATIONS_REQUEST = 32775;
+    RADIO_MESSAGE_SCAN_STATIONS_RESPONSE = 32776;
+    RADIO_MESSAGE_TUNE_TO_STATION_REQUEST = 32777;
+    RADIO_MESSAGE_TUNE_TO_STATION_RESPONSE = 32778;
+    RADIO_MESSAGE_GET_PROGRAM_LIST_REQUEST = 32779;
+    RADIO_MESSAGE_GET_PROGRAM_LIST_RESPONSE = 32780;
+    RADIO_MESSAGE_STATION_PRESETS_NOTIFICATION = 32781;
+    RADIO_MESSAGE_CANCEL_OPERATIONS_REQUEST = 32782;
+    RADIO_MESSAGE_CANCEL_OPERATIONS_RESPONSE = 32783;
+    RADIO_MESSAGE_CONFIGURE_CHANNEL_SPACING_REQUEST = 32784;
+    RADIO_MESSAGE_CONFIGURE_CHANNEL_SPACING_RESPONSE = 32785;
+    RADIO_MESSAGE_RADIO_STATION_INFO_NOTIFICATION = 32786;
+    RADIO_MESSAGE_MUTE_RADIO_REQUEST = 32787;
+    RADIO_MESSAGE_MUTE_RADIO_RESPONSE = 32788;
+    RADIO_MESSAGE_GET_TRAFFIC_UPDATE_REQUEST = 32789;
+    RADIO_MESSAGE_GET_TRAFFIC_UPDATE_RESPONSE = 32790;
+    RADIO_MESSAGE_RADIO_SOURCE_REQUEST = 32791;
+    RADIO_MESSAGE_RADIO_SOURCE_RESPONSE = 32792;
+    RADIO_MESSAGE_STATE_NOTIFICATION = 32793;
+}
+
+enum HdAcquisionState {
+    ANALOG = 0;
+    ACQUIRING_HD = 1;
+    ACQUIRED_HD = 2;
+}
+
+enum NavigationStatusMessageId {
+    INSTRUMENT_CLUSTER_START = 32769;
+    INSTRUMENT_CLUSTER_STOP = 32770;
+    INSTRUMENT_CLUSTER_NAVIGATION_STATUS = 32771;
+    INSTRUMENT_CLUSTER_NAVIGATION_TURN_EVENT = 32772 [deprecated = true];
+    INSTRUMENT_CLUSTER_NAVIGATION_DISTANCE_EVENT = 32773 [deprecated = true];
+    INSTRUMENT_CLUSTER_NAVIGATION_STATE = 32774;
+    INSTRUMENT_CLUSTER_NAVIGATION_CURRENT_POSITION = 32775;
+}
+
+enum MediaPlaybackStatusMessageId {
+    MEDIA_PLAYBACK_STATUS = 32769;
+    MEDIA_PLAYBACK_INPUT = 32770;
+    MEDIA_PLAYBACK_METADATA = 32771;
+}
+
+enum PhoneStatusMessageId {
+    PHONE_STATUS = 32769;
+    PHONE_STATUS_INPUT = 32770;
+}
+
+enum MediaBrowserMessageId {
+    MEDIA_ROOT_NODE = 32769;
+    MEDIA_SOURCE_NODE = 32770;
+    MEDIA_LIST_NODE = 32771;
+    MEDIA_SONG_NODE = 32772;
+    MEDIA_GET_NODE = 32773;
+    MEDIA_BROWSE_INPUT = 32774;
+}
+
+enum GalVerificationVendorExtensionMessageId {
+    GAL_VERIFICATION_SET_SENSOR = 32769;
+    GAL_VERIFICATION_MEDIA_SINK_STATUS = 32770;
+    GAL_VERIFICATION_VIDEO_FOCUS = 32771;
+    GAL_VERIFICATION_AUDIO_FOCUS = 32772;
+    GAL_VERIFICATION_INJECT_INPUT = 32773;
+    GAL_VERIFICATION_BUG_REPORT_REQUEST = 32774;
+    GAL_VERIFICATION_BUG_REPORT_RESPONSE = 32775;
+    GAL_VERIFICATION_SCREEN_CAPTURE_REQUEST = 32776;
+    GAL_VERIFICATION_SCREEN_CAPTURE_RESPONSE = 32777;
+    GAL_VERIFICATION_DISPLAY_INFORMATION_REQUEST = 32778;
+    GAL_VERIFICATION_DISPLAY_INFORMATION_RESPONSE = 32779;
+}
+
+enum GenericNotificationMessageId {
+    GENERIC_NOTIFICATION_SUBSCRIBE = 32769;
+    GENERIC_NOTIFICATION_UNSUBSCRIBE = 32770;
+    GENERIC_NOTIFICATION_MESSAGE = 32771;
+    GENERIC_NOTIFICATION_ACK = 32772;
+}
+
+enum GoogleDiagnosticsVendorExtensionMessageId {
+    DIAGNOSTICS_BUG_REPORT_REQUEST = 1;
+    DIAGNOSTICS_BUG_REPORT_RESPONSE = 2;
+}
+
+enum MessageStatus {
+    STATUS_UNSOLICITED_MESSAGE = 1;
+    STATUS_SUCCESS = 0;
+    STATUS_NO_COMPATIBLE_VERSION = -1;
+    STATUS_CERTIFICATE_ERROR = -2;
+    STATUS_AUTHENTICATION_FAILURE = -3;
+    STATUS_INVALID_SERVICE = -4;
+    STATUS_INVALID_CHANNEL = -5;
+    STATUS_INVALID_PRIORITY = -6;
+    STATUS_INTERNAL_ERROR = -7;
+    STATUS_MEDIA_CONFIG_MISMATCH = -8;
+    STATUS_INVALID_SENSOR = -9;
+    STATUS_BLUETOOTH_PAIRING_DELAYED = -10;
+    STATUS_BLUETOOTH_UNAVAILABLE = -11;
+    STATUS_BLUETOOTH_INVALID_ADDRESS = -12;
+    STATUS_BLUETOOTH_INVALID_PAIRING_METHOD = -13;
+    STATUS_BLUETOOTH_INVALID_AUTH_DATA = -14;
+    STATUS_BLUETOOTH_AUTH_DATA_MISMATCH = -15;
+    STATUS_BLUETOOTH_HFP_ANOTHER_CONNECTION = -16;
+    STATUS_BLUETOOTH_HFP_CONNECTION_FAILURE = -17;
+    STATUS_KEYCODE_NOT_BOUND = -18;
+    STATUS_RADIO_INVALID_STATION = -19;
+    STATUS_INVALID_INPUT = -20;
+    STATUS_RADIO_STATION_PRESETS_NOT_SUPPORTED = -21;
+    STATUS_RADIO_COMM_ERROR = -22;
+    STATUS_AUTHENTICATION_FAILURE_CERT_NOT_YET_VALID = -23;
+    STATUS_AUTHENTICATION_FAILURE_CERT_EXPIRED = -24;
+    STATUS_PING_TIMEOUT = -25;
+    STATUS_COMMAND_NOT_SUPPORTED = -250;
+    STATUS_FRAMING_ERROR = -251;
+    STATUS_UNEXPECTED_MESSAGE = -253;
+    STATUS_BUSY = -254;
+    STATUS_OUT_OF_MEMORY = -255;
+}
+
+enum KeyCode {
+    KEYCODE_UNKNOWN = 0;
+    KEYCODE_SOFT_LEFT = 1;
+    KEYCODE_SOFT_RIGHT = 2;
+    KEYCODE_HOME = 3;
+    KEYCODE_BACK = 4;
+    KEYCODE_CALL = 5;
+    KEYCODE_ENDCALL = 6;
+    KEYCODE_0 = 7;
+    KEYCODE_1 = 8;
+    KEYCODE_2 = 9;
+    KEYCODE_3 = 10;
+    KEYCODE_4 = 11;
+    KEYCODE_5 = 12;
+    KEYCODE_6 = 13;
+    KEYCODE_7 = 14;
+    KEYCODE_8 = 15;
+    KEYCODE_9 = 16;
+    KEYCODE_STAR = 17;
+    KEYCODE_POUND = 18;
+    KEYCODE_DPAD_UP = 19;
+    KEYCODE_DPAD_DOWN = 20;
+    KEYCODE_DPAD_LEFT = 21;
+    KEYCODE_DPAD_RIGHT = 22;
+    KEYCODE_DPAD_CENTER = 23;
+    KEYCODE_VOLUME_UP = 24;
+    KEYCODE_VOLUME_DOWN = 25;
+    KEYCODE_POWER = 26;
+    KEYCODE_CAMERA = 27;
+    KEYCODE_CLEAR = 28;
+    KEYCODE_A = 29;
+    KEYCODE_B = 30;
+    KEYCODE_C = 31;
+    KEYCODE_D = 32;
+    KEYCODE_E = 33;
+    KEYCODE_F = 34;
+    KEYCODE_G = 35;
+    KEYCODE_H = 36;
+    KEYCODE_I = 37;
+    KEYCODE_J = 38;
+    KEYCODE_K = 39;
+    KEYCODE_L = 40;
+    KEYCODE_M = 41;
+    KEYCODE_N = 42;
+    KEYCODE_O = 43;
+    KEYCODE_P = 44;
+    KEYCODE_Q = 45;
+    KEYCODE_R = 46;
+    KEYCODE_S = 47;
+    KEYCODE_T = 48;
+    KEYCODE_U = 49;
+    KEYCODE_V = 50;
+    KEYCODE_W = 51;
+    KEYCODE_X = 52;
+    KEYCODE_Y = 53;
+    KEYCODE_Z = 54;
+    KEYCODE_COMMA = 55;
+    KEYCODE_PERIOD = 56;
+    KEYCODE_ALT_LEFT = 57;
+    KEYCODE_ALT_RIGHT = 58;
+    KEYCODE_SHIFT_LEFT = 59;
+    KEYCODE_SHIFT_RIGHT = 60;
+    KEYCODE_TAB = 61;
+    KEYCODE_SPACE = 62;
+    KEYCODE_SYM = 63;
+    KEYCODE_EXPLORER = 64;
+    KEYCODE_ENVELOPE = 65;
+    KEYCODE_ENTER = 66;
+    KEYCODE_DEL = 67;
+    KEYCODE_GRAVE = 68;
+    KEYCODE_MINUS = 69;
+    KEYCODE_EQUALS = 70;
+    KEYCODE_LEFT_BRACKET = 71;
+    KEYCODE_RIGHT_BRACKET = 72;
+    KEYCODE_BACKSLASH = 73;
+    KEYCODE_SEMICOLON = 74;
+    KEYCODE_APOSTROPHE = 75;
+    KEYCODE_SLASH = 76;
+    KEYCODE_AT = 77;
+    KEYCODE_NUM = 78;
+    KEYCODE_HEADSETHOOK = 79;
+    KEYCODE_FOCUS = 80;
+    KEYCODE_PLUS = 81;
+    KEYCODE_MENU = 82;
+    KEYCODE_NOTIFICATION = 83;
+    KEYCODE_SEARCH = 84;
+    KEYCODE_MEDIA_PLAY_PAUSE = 85;
+    KEYCODE_MEDIA_STOP = 86;
+    KEYCODE_MEDIA_NEXT = 87;
+    KEYCODE_MEDIA_PREVIOUS = 88;
+    KEYCODE_MEDIA_REWIND = 89;
+    KEYCODE_MEDIA_FAST_FORWARD = 90;
+    KEYCODE_MUTE = 91;
+    KEYCODE_PAGE_UP = 92;
+    KEYCODE_PAGE_DOWN = 93;
+    KEYCODE_PICTSYMBOLS = 94;
+    KEYCODE_SWITCH_CHARSET = 95;
+    KEYCODE_BUTTON_A = 96;
+    KEYCODE_BUTTON_B = 97;
+    KEYCODE_BUTTON_C = 98;
+    KEYCODE_BUTTON_X = 99;
+    KEYCODE_BUTTON_Y = 100;
+    KEYCODE_BUTTON_Z = 101;
+    KEYCODE_BUTTON_L1 = 102;
+    KEYCODE_BUTTON_R1 = 103;
+    KEYCODE_BUTTON_L2 = 104;
+    KEYCODE_BUTTON_R2 = 105;
+    KEYCODE_BUTTON_THUMBL = 106;
+    KEYCODE_BUTTON_THUMBR = 107;
+    KEYCODE_BUTTON_START = 108;
+    KEYCODE_BUTTON_SELECT = 109;
+    KEYCODE_BUTTON_MODE = 110;
+    KEYCODE_ESCAPE = 111;
+    KEYCODE_FORWARD_DEL = 112;
+    KEYCODE_CTRL_LEFT = 113;
+    KEYCODE_CTRL_RIGHT = 114;
+    KEYCODE_CAPS_LOCK = 115;
+    KEYCODE_SCROLL_LOCK = 116;
+    KEYCODE_META_LEFT = 117;
+    KEYCODE_META_RIGHT = 118;
+    KEYCODE_FUNCTION = 119;
+    KEYCODE_SYSRQ = 120;
+    KEYCODE_BREAK = 121;
+    KEYCODE_MOVE_HOME = 122;
+    KEYCODE_MOVE_END = 123;
+    KEYCODE_INSERT = 124;
+    KEYCODE_FORWARD = 125;
+    KEYCODE_MEDIA_PLAY = 126;
+    KEYCODE_MEDIA_PAUSE = 127;
+    KEYCODE_MEDIA_CLOSE = 128;
+    KEYCODE_MEDIA_EJECT = 129;
+    KEYCODE_MEDIA_RECORD = 130;
+    KEYCODE_F1 = 131;
+    KEYCODE_F2 = 132;
+    KEYCODE_F3 = 133;
+    KEYCODE_F4 = 134;
+    KEYCODE_F5 = 135;
+    KEYCODE_F6 = 136;
+    KEYCODE_F7 = 137;
+    KEYCODE_F8 = 138;
+    KEYCODE_F9 = 139;
+    KEYCODE_F10 = 140;
+    KEYCODE_F11 = 141;
+    KEYCODE_F12 = 142;
+    KEYCODE_NUM_LOCK = 143;
+    KEYCODE_NUMPAD_0 = 144;
+    KEYCODE_NUMPAD_1 = 145;
+    KEYCODE_NUMPAD_2 = 146;
+    KEYCODE_NUMPAD_3 = 147;
+    KEYCODE_NUMPAD_4 = 148;
+    KEYCODE_NUMPAD_5 = 149;
+    KEYCODE_NUMPAD_6 = 150;
+    KEYCODE_NUMPAD_7 = 151;
+    KEYCODE_NUMPAD_8 = 152;
+    KEYCODE_NUMPAD_9 = 153;
+    KEYCODE_NUMPAD_DIVIDE = 154;
+    KEYCODE_NUMPAD_MULTIPLY = 155;
+    KEYCODE_NUMPAD_SUBTRACT = 156;
+    KEYCODE_NUMPAD_ADD = 157;
+    KEYCODE_NUMPAD_DOT = 158;
+    KEYCODE_NUMPAD_COMMA = 159;
+    KEYCODE_NUMPAD_ENTER = 160;
+    KEYCODE_NUMPAD_EQUALS = 161;
+    KEYCODE_NUMPAD_LEFT_PAREN = 162;
+    KEYCODE_NUMPAD_RIGHT_PAREN = 163;
+    KEYCODE_VOLUME_MUTE = 164;
+    KEYCODE_INFO = 165;
+    KEYCODE_CHANNEL_UP = 166;
+    KEYCODE_CHANNEL_DOWN = 167;
+    KEYCODE_ZOOM_IN = 168;
+    KEYCODE_ZOOM_OUT = 169;
+    KEYCODE_TV = 170;
+    KEYCODE_WINDOW = 171;
+    KEYCODE_GUIDE = 172;
+    KEYCODE_DVR = 173;
+    KEYCODE_BOOKMARK = 174;
+    KEYCODE_CAPTIONS = 175;
+    KEYCODE_SETTINGS = 176;
+    KEYCODE_TV_POWER = 177;
+    KEYCODE_TV_INPUT = 178;
+    KEYCODE_STB_POWER = 179;
+    KEYCODE_STB_INPUT = 180;
+    KEYCODE_AVR_POWER = 181;
+    KEYCODE_AVR_INPUT = 182;
+    KEYCODE_PROG_RED = 183;
+    KEYCODE_PROG_GREEN = 184;
+    KEYCODE_PROG_YELLOW = 185;
+    KEYCODE_PROG_BLUE = 186;
+    KEYCODE_APP_SWITCH = 187;
+    KEYCODE_BUTTON_1 = 188;
+    KEYCODE_BUTTON_2 = 189;
+    KEYCODE_BUTTON_3 = 190;
+    KEYCODE_BUTTON_4 = 191;
+    KEYCODE_BUTTON_5 = 192;
+    KEYCODE_BUTTON_6 = 193;
+    KEYCODE_BUTTON_7 = 194;
+    KEYCODE_BUTTON_8 = 195;
+    KEYCODE_BUTTON_9 = 196;
+    KEYCODE_BUTTON_10 = 197;
+    KEYCODE_BUTTON_11 = 198;
+    KEYCODE_BUTTON_12 = 199;
+    KEYCODE_BUTTON_13 = 200;
+    KEYCODE_BUTTON_14 = 201;
+    KEYCODE_BUTTON_15 = 202;
+    KEYCODE_BUTTON_16 = 203;
+    KEYCODE_LANGUAGE_SWITCH = 204;
+    KEYCODE_MANNER_MODE = 205;
+    KEYCODE_3D_MODE = 206;
+    KEYCODE_CONTACTS = 207;
+    KEYCODE_CALENDAR = 208;
+    KEYCODE_MUSIC = 209;
+    KEYCODE_CALCULATOR = 210;
+    KEYCODE_ZENKAKU_HANKAKU = 211;
+    KEYCODE_EISU = 212;
+    KEYCODE_MUHENKAN = 213;
+    KEYCODE_HENKAN = 214;
+    KEYCODE_KATAKANA_HIRAGANA = 215;
+    KEYCODE_YEN = 216;
+    KEYCODE_RO = 217;
+    KEYCODE_KANA = 218;
+    KEYCODE_ASSIST = 219;
+    KEYCODE_BRIGHTNESS_DOWN = 220;
+    KEYCODE_BRIGHTNESS_UP = 221;
+    KEYCODE_MEDIA_AUDIO_TRACK = 222;
+    KEYCODE_SLEEP = 223;
+    KEYCODE_WAKEUP = 224;
+    KEYCODE_PAIRING = 225;
+    KEYCODE_MEDIA_TOP_MENU = 226;
+    KEYCODE_11 = 227;
+    KEYCODE_12 = 228;
+    KEYCODE_LAST_CHANNEL = 229;
+    KEYCODE_TV_DATA_SERVICE = 230;
+    KEYCODE_VOICE_ASSIST = 231;
+    KEYCODE_TV_RADIO_SERVICE = 232;
+    KEYCODE_TV_TELETEXT = 233;
+    KEYCODE_TV_NUMBER_ENTRY = 234;
+    KEYCODE_TV_TERRESTRIAL_ANALOG = 235;
+    KEYCODE_TV_TERRESTRIAL_DIGITAL = 236;
+    KEYCODE_TV_SATELLITE = 237;
+    KEYCODE_TV_SATELLITE_BS = 238;
+    KEYCODE_TV_SATELLITE_CS = 239;
+    KEYCODE_TV_SATELLITE_SERVICE = 240;
+    KEYCODE_TV_NETWORK = 241;
+    KEYCODE_TV_ANTENNA_CABLE = 242;
+    KEYCODE_TV_INPUT_HDMI_1 = 243;
+    KEYCODE_TV_INPUT_HDMI_2 = 244;
+    KEYCODE_TV_INPUT_HDMI_3 = 245;
+    KEYCODE_TV_INPUT_HDMI_4 = 246;
+    KEYCODE_TV_INPUT_COMPOSITE_1 = 247;
+    KEYCODE_TV_INPUT_COMPOSITE_2 = 248;
+    KEYCODE_TV_INPUT_COMPONENT_1 = 249;
+    KEYCODE_TV_INPUT_COMPONENT_2 = 250;
+    KEYCODE_TV_INPUT_VGA_1 = 251;
+    KEYCODE_TV_AUDIO_DESCRIPTION = 252;
+    KEYCODE_TV_AUDIO_DESCRIPTION_MIX_UP = 253;
+    KEYCODE_TV_AUDIO_DESCRIPTION_MIX_DOWN = 254;
+    KEYCODE_TV_ZOOM_MODE = 255;
+    KEYCODE_TV_CONTENTS_MENU = 256;
+    KEYCODE_TV_MEDIA_CONTEXT_MENU = 257;
+    KEYCODE_TV_TIMER_PROGRAMMING = 258;
+    KEYCODE_HELP = 259;
+    KEYCODE_NAVIGATE_PREVIOUS = 260;
+    KEYCODE_NAVIGATE_NEXT = 261;
+    KEYCODE_NAVIGATE_IN = 262;
+    KEYCODE_NAVIGATE_OUT = 263;
+    KEYCODE_DPAD_UP_LEFT = 268;
+    KEYCODE_DPAD_DOWN_LEFT = 269;
+    KEYCODE_DPAD_UP_RIGHT = 270;
+    KEYCODE_DPAD_DOWN_RIGHT = 271;
+    KEYCODE_SENTINEL = 65535;
+    KEYCODE_ROTARY_CONTROLLER = 65536;
+    KEYCODE_MEDIA = 65537;
+    KEYCODE_NAVIGATION = 65538;
+    KEYCODE_RADIO = 65539;
+    KEYCODE_TEL = 65540;
+    KEYCODE_PRIMARY_BUTTON = 65541;
+    KEYCODE_SECONDARY_BUTTON = 65542;
+    KEYCODE_TERTIARY_BUTTON = 65543;
+    KEYCODE_TURN_CARD = 65544;
+}
+
+enum GalConstants {
+    WIFI_PORT = 30515;
+    PROTOCOL_MAJOR_VERSION = 1;
+    PROTOCOL_MINOR_VERSION = 6;
+}

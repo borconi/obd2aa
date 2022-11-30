@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="cameratype">
+        <item>@string/speed_cam</item>
+        <item>@string/red_cam</item>
+        <item>@string/section_cam</item>
+        <item>@string/other_cam</item>
+    </string-array>
+
+    <string-array name="cameratype_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+    <string-array name="coolantvalue">
+        <item>05,0</item>
+        <item>5c,0</item>
+    </string-array>
+
+    <string-array name="fuelpids">
+        <item>@string/fuel_from_ecu</item>
+        <item>@string/fuel_from_profile</item>
+        <item>@string/dist_to_empt</item>
+    </string-array>
+
+    <string-array name="fuelvalue">
+        <item>2f,0</item>
+        <item>ff126b,0</item>
+        <item>ff126a,0</item>
+    </string-array>
+
+    <string-array name="gaugenumbers">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+    </string-array>
+
+    <string-array name="mobile_refresh_entries">
+        <item>5 min</item>
+        <item>10 min</item>
+        <item>30 min</item>
+        <item>60 min</item>
+        <item>@string/never_mobile</item>
+    </string-array>
+
+    <string-array name="mobile_refresh_values">
+        <item>3000</item>
+        <item>6000</item>
+        <item>18000</item>
+        <item>36000</item>
+        <item>0</item>
+    </string-array>
+
+    <string-array name="oilpids">
+        <item>@string/coolant_water</item>
+        <item>@string/coolant_oil</item>
+    </string-array>
+
+    <string-array name="screen_names">
+        <item>@string/maps</item>
+        <item>@string/phone</item>
+        <item>@string/home</item>
+        <item>@string/media</item>
+        <item>@string/obd2aa</item>
+    </string-array>
+
+    <string-array name="screen_values">
+        <item>65538</item>
+        <item>65540</item>
+        <item>3</item>
+        <item>65537</item>
+        <item>0</item>
+    </string-array>
+
+    <string-array name="LayoutEntries">
+        <item>Auto</item>
+        <item>Style 1</item>
+        <item>Style 2</item>
+        <item>Style 3</item>
+    </string-array>
+
+    <string-array name="LayoutEntriesValues">
+        <item>AUTO</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <array name="LayoutEntriesImages">
+        <item>@drawable/auto</item>
+        <item>@drawable/style_1</item>
+        <item>@drawable/style_2</item>
+        <item>@drawable/style_3</item>
+    </array>
+
+    <string-array name="gaugeEntries">
+        <item>@string/clear</item>
+        <item>@string/a_nobg_only_compl_feel</item>
+        <item>@string/b_nobg_fullfill</item>
+        <item>@string/c_bg_nofill</item>
+        <item>@string/d_bg_fill_compl</item>
+        <item>@string/e_bg_ffull_fill</item>
+        <item>@string/d_bg_fill_compl</item>
+        <item>@string/d_bg_fill_compl</item>
+    </string-array>
+
+<!--    <integer-array name="GaugeEntriesValue">-->
+<!--        <item>@drawable/clear</item>-->
+<!--        <item>@drawable/a_nobg_only_compl_feel</item>-->
+<!--        <item>@drawable/b_nobg_fullfill</item>-->
+<!--        <item>@drawable/c_bg_nofill</item>-->
+<!--        <item>@drawable/d_bg_fill_compl</item>-->
+<!--        <item>@drawable/e_bg_ffull_fill</item>-->
+<!--        <item>@drawable/partfill_bg1</item>-->
+<!--        <item>@drawable/partfill_bg2</item>-->
+<!--    </integer-array>-->
+
+    <string-array name="GaugeEntriesValue">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+
+    <array name="GaugeEntriesImages">
+        <item>@drawable/clear</item>
+        <item>@drawable/a_nobg_only_compl_feel</item>
+        <item>@drawable/b_nobg_fullfill</item>
+        <item>@drawable/c_bg_nofill</item>
+        <item>@drawable/d_bg_fill_compl</item>
+        <item>@drawable/e_bg_ffull_fill</item>
+        <item>@drawable/partfill_bg1</item>
+        <item>@drawable/partfill_bg2</item>
+    </array>
+</resources>

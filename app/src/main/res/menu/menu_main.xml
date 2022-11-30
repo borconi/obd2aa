@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.obd2aa.uk.vo.boconi.emil.obd2aa.MainActivity">
+
+    <item
+        android:id="@+id/pref_menu"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="@string/settings" />
+    <item
+        android:id="@+id/speedcam_menu"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="@string/speedcam_settings" />
+    <item
+        android:id="@+id/tpms_menu"
+        android:title="TPMS" />
+</menu>

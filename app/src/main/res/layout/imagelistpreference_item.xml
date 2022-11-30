@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingBottom="8dp"
+    android:paddingEnd="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingStart="16dp"
+    android:paddingTop="8dp">
+
+    <TextView
+        android:id="@+id/imagelistpreference_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_toEndOf="@+id/imagelistpreference_radio"
+        android:layout_toRightOf="@+id/imagelistpreference_radio"
+        android:layout_toLeftOf="@+id/imagelistpreference_image"
+        android:layout_toStartOf="@+id/imagelistpreference_image" />
+    <RadioButton
+        android:id="@+id/imagelistpreference_radio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:clickable="false"
+        android:focusable="false"
+    />
+    <ImageView
+        android:id="@+id/imagelistpreference_image"
+        android:tint="#FF000000"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_margin="5dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+    />
+</RelativeLayout>

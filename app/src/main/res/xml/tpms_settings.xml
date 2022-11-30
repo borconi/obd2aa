@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <ListPreference
+        app:iconSpaceReserved="false"
+        app:useSimpleSummaryProvider="true"
+        android:dialogTitle="@string/front_left"
+        android:key="front_left_pressure"
+        android:id="@+id/front_left_pressure"
+        android:title="@string/front_left" />
+
+    <ListPreference
+        app:iconSpaceReserved="false"
+        app:useSimpleSummaryProvider="true"
+        android:dialogTitle="@string/front_left"
+        android:key="front_right_pressure"
+        android:id="@+id/front_right_pressure"
+        android:title="@string/front_left" />
+
+    <ListPreference
+        app:iconSpaceReserved="false"
+        app:useSimpleSummaryProvider="true"
+        android:dialogTitle="@string/front_left"
+        android:key="rear_left_pressure"
+        android:id="@+id/rear_left_pressure"
+        android:title="@string/front_left" />
+
+    <ListPreference
+        app:iconSpaceReserved="false"
+        app:useSimpleSummaryProvider="true"
+        android:dialogTitle="@string/front_left"
+        android:key="rear_right_pressure"
+        android:id="@+id/rear_right_pressure"
+        android:title="@string/front_left" />
+
+
+</PreferenceScreen>

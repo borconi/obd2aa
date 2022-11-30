@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <uk.co.borconi.emil.obd2aa.preference.PidListPreference
+        android:enabled="true"
+        android:key="gaugepid"
+        android:title="PID"
+        app:iconSpaceReserved="false"
+        app:useSimpleSummaryProvider="true" />
+
+    <androidx.preference.EditTextPreference
+        android:digits="0123456789"
+        android:inputType="numberDecimal"
+        android:key="minval"
+        android:title="@string/min_val"
+        app:iconSpaceReserved="false"
+        app:useSimpleSummaryProvider="true" />
+
+    <androidx.preference.EditTextPreference
+        android:digits="0123456789"
+        android:inputType="numberDecimal"
+        android:key="maxval"
+        android:title="@string/max_val"
+        app:iconSpaceReserved="false"
+        app:useSimpleSummaryProvider="true" />
+
+    <uk.co.borconi.emil.obd2aa.preference.ImageListPreference
+        android:entries="@array/gaugeEntries"
+        android:entryValues="@array/GaugeEntriesValue"
+        android:key="gauges_style_spinner"
+        android:title="@string/gauge_style"
+        app:iconSpaceReserved="false"
+        app:ilp_entryImages="@array/GaugeEntriesImages"
+        app:useSimpleSummaryProvider="true" />
+
+    <androidx.preference.SwitchPreferenceCompat
+        android:key="isreversed"
+        android:title="@string/isreversed"
+        app:iconSpaceReserved="false" />
+
+    <androidx.preference.SwitchPreferenceCompat
+        android:key="showneedle"
+        android:title="@string/show_needle"
+        app:iconSpaceReserved="false" />
+
+    <androidx.preference.SwitchPreferenceCompat
+        android:key="showscale"
+        android:title="@string/show_scale"
+        app:iconSpaceReserved="false" />
+
+    <androidx.preference.SwitchPreferenceCompat
+        android:key="showunit"
+        android:title="@string/show_unit"
+        app:iconSpaceReserved="false" />
+
+    <androidx.preference.SwitchPreferenceCompat
+        android:key="showtext"
+        android:title="@string/show_text"
+        app:iconSpaceReserved="false" />
+
+    <androidx.preference.SwitchPreferenceCompat
+        android:key="usegradienttext"
+        android:title="@string/use_warning_text"
+        app:iconSpaceReserved="false" />
+
+    <androidx.preference.SwitchPreferenceCompat
+        android:key="showdecimal"
+        android:title="@string/show_decimals"
+        app:iconSpaceReserved="false" />
+
+    <androidx.preference.EditTextPreference
+        android:defaultValue="80"
+        android:digits="0123456789"
+        android:inputType="numberDecimal"
+        android:key="warn1level"
+        android:title="@string/warn1"
+        app:iconSpaceReserved="false"
+        app:useSimpleSummaryProvider="true" />
+
+    <androidx.preference.EditTextPreference
+        android:defaultValue="90"
+        android:digits="0123456789"
+        android:inputType="numberDecimal"
+        android:key="warn2level"
+        android:title="@string/warn2"
+        app:iconSpaceReserved="false"
+        app:useSimpleSummaryProvider="true" />
+
+    <androidx.preference.EditTextPreference
+        android:digits="0123456789"
+        android:inputType="numberDecimal"
+        android:key="arch_indent"
+        android:title="@string/arch_indent"
+        app:iconSpaceReserved="false"
+        app:useSimpleSummaryProvider="true" />
+
+    <androidx.preference.EditTextPreference
+        android:digits="0123456789"
+        android:inputType="numberDecimal"
+        android:key="arch_startpos"
+        android:title="@string/arch_startpos"
+        app:iconSpaceReserved="false"
+        app:useSimpleSummaryProvider="true" />
+
+    <androidx.preference.EditTextPreference
+        android:digits="0123456789"
+        android:inputType="numberDecimal"
+        android:key="arch_length"
+        android:title="@string/arch_length"
+        app:iconSpaceReserved="false"
+        app:useSimpleSummaryProvider="true" />
+</PreferenceScreen>

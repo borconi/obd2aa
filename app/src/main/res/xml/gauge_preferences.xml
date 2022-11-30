@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <uk.co.borconi.emil.obd2aa.preference.ImageListPreference
+        android:entries="@array/LayoutEntries"
+        android:entryValues="@array/LayoutEntriesValues"
+        android:key="layout_style_spinner"
+        android:title="@string/layout_style"
+        app:iconSpaceReserved="false"
+        app:ilp_entryImages="@array/LayoutEntriesImages"
+        app:useSimpleSummaryProvider="true" />
+
+    <androidx.preference.ListPreference
+        android:defaultValue="6"
+        android:entries="@array/gaugenumbers"
+        android:entryValues="@array/gaugenumbers"
+        android:key="gauge_counter"
+        android:title="@string/gauge_counter"
+        app:iconSpaceReserved="false"
+        app:useSimpleSummaryProvider="true" />
+
+    <androidx.preference.EditTextPreference
+        android:defaultValue="8"
+        android:digits="0123456789"
+        android:inputType="numberDecimal"
+        android:key="arch_width"
+        android:title="@string/arch_width"
+        app:iconSpaceReserved="false"
+        app:useSimpleSummaryProvider="true" />
+
+    <com.rarepebble.colorpicker.ColorPreference
+        android:defaultValue="#00FF00"
+        android:key="def_color_selector"
+        android:title="@string/arch_color"
+        app:iconSpaceReserved="false" />
+    <com.rarepebble.colorpicker.ColorPreference
+        android:defaultValue="#FF6A00"
+        android:key="warn1_color_selector"
+        android:title="@string/warn1_color"
+        app:iconSpaceReserved="false" />
+    <com.rarepebble.colorpicker.ColorPreference
+        android:defaultValue="#FF0000"
+        android:key="warn2_color_selector"
+        android:title="@string/warn2_color"
+        app:iconSpaceReserved="false" />
+
+    <com.rarepebble.colorpicker.ColorPreference
+        android:defaultValue="#FFFFFF"
+        android:key="text_color_selector"
+        android:title="@string/text_color"
+        app:iconSpaceReserved="false" />
+
+    <com.rarepebble.colorpicker.ColorPreference
+        android:defaultValue="#FFFFFF"
+        android:key="needle_color_selector"
+        android:title="@string/needle_color"
+        app:iconSpaceReserved="false" />
+</PreferenceScreen>

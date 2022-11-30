@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/waitTorque">
+
+
+    <fragment
+        android:id="@+id/waitTorque"
+        android:name="uk.co.borconi.emil.obd2aa.WaitForTorque"
+        android:label="@string/app_name"
+        tools:layout="@layout/wait_for_torque">
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/FirstFragment"
+        android:name="uk.co.borconi.emil.obd2aa.AppSettings"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_first">
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/PreferenceFragment"
+        android:name="uk.co.borconi.emil.obd2aa.AppPreference"
+        android:label="@string/settings"
+        >
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/AppCameraSettings"
+        android:name="uk.co.borconi.emil.obd2aa.AppCameraSettings"
+        android:label="@string/speedcam_settings"
+        >
+    </fragment>
+
+ <fragment
+        android:id="@+id/TpmsSettings"
+        android:name="uk.co.borconi.emil.obd2aa.TpmsSettings"
+        android:label="@string/tpms_set_tit"
+        >
+    </fragment>
+
+
+
+
+</navigation>

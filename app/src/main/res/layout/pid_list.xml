@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/LinearLayout01"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+
+    android:gravity="center">
+    <EditText android:id="@+id/EditBox"
+        android:maxLines="1"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="left">
+    </EditText>
+    <ListView android:id="@+id/List"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:choiceMode="singleChoice">
+    </ListView>
+
+
+
+</LinearLayout>
